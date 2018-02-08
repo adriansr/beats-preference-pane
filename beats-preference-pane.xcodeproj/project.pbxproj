@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A6F9AB6202C939D0046F40E /* beats_preference_pane.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6F9AB5202C939D0046F40E /* beats_preference_pane.h */; };
+		3A6F9AB8202C939D0046F40E /* beats_preference_pane.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6F9AB7202C939D0046F40E /* beats_preference_pane.m */; };
+		3A6F9ABA202C939D0046F40E /* beats_preference_pane.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3A6F9AB9202C939D0046F40E /* beats_preference_pane.tiff */; };
+		3A6F9ABD202C939D0046F40E /* beats_preference_pane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6F9ABB202C939D0046F40E /* beats_preference_pane.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "beats-preference-pane.prefPane"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A6F9AB5202C939D0046F40E /* beats_preference_pane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = beats_preference_pane.h; sourceTree = "<group>"; };
+		3A6F9AB7202C939D0046F40E /* beats_preference_pane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = beats_preference_pane.m; sourceTree = "<group>"; };
+		3A6F9AB9202C939D0046F40E /* beats_preference_pane.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = beats_preference_pane.tiff; sourceTree = "<group>"; };
+		3A6F9ABC202C939D0046F40E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/beats_preference_pane.xib; sourceTree = "<group>"; };
+		3A6F9ABE202C939D0046F40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A6F9AAE202C939D0046F40E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A6F9AA8202C939D0046F40E = {
+			isa = PBXGroup;
+			children = (
+				3A6F9AB4202C939D0046F40E /* beats-preference-pane */,
+				3A6F9AB3202C939D0046F40E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A6F9AB3202C939D0046F40E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A6F9AB4202C939D0046F40E /* beats-preference-pane */ = {
+			isa = PBXGroup;
+			children = (
+				3A6F9AB5202C939D0046F40E /* beats_preference_pane.h */,
+				3A6F9AB7202C939D0046F40E /* beats_preference_pane.m */,
+				3A6F9AB9202C939D0046F40E /* beats_preference_pane.tiff */,
+				3A6F9ABB202C939D0046F40E /* beats_preference_pane.xib */,
+				3A6F9ABE202C939D0046F40E /* Info.plist */,
+			);
+			path = "beats-preference-pane";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3A6F9AAF202C939D0046F40E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A6F9AB6202C939D0046F40E /* beats_preference_pane.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3A6F9AB1202C939D0046F40E /* beats-preference-pane */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A6F9AC1202C939D0046F40E /* Build configuration list for PBXNativeTarget "beats-preference-pane" */;
+			buildPhases = (
+				3A6F9AAD202C939D0046F40E /* Sources */,
+				3A6F9AAE202C939D0046F40E /* Frameworks */,
+				3A6F9AAF202C939D0046F40E /* Headers */,
+				3A6F9AB0202C939D0046F40E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "beats-preference-pane";
+			productName = "beats-preference-pane";
+			productReference = 3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A6F9AA9202C939D0046F40E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = Elastic;
+				TargetAttributes = {
+					3A6F9AB1202C939D0046F40E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3A6F9AAC202C939D0046F40E /* Build configuration list for PBXProject "beats-preference-pane" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A6F9AA8202C939D0046F40E;
+			productRefGroup = 3A6F9AB3202C939D0046F40E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A6F9AB1202C939D0046F40E /* beats-preference-pane */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A6F9AB0202C939D0046F40E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A6F9ABD202C939D0046F40E /* beats_preference_pane.xib in Resources */,
+				3A6F9ABA202C939D0046F40E /* beats_preference_pane.tiff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A6F9AAD202C939D0046F40E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A6F9AB8202C939D0046F40E /* beats_preference_pane.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3A6F9ABB202C939D0046F40E /* beats_preference_pane.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6F9ABC202C939D0046F40E /* Base */,
+			);
+			name = beats_preference_pane.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A6F9ABF202C939D0046F40E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3A6F9AC0202C939D0046F40E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3A6F9AC2202C939D0046F40E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2BT3HPN62Z;
+				INFOPLIST_FILE = "beats-preference-pane/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.elastic.beats-preference-pane";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Debug;
+		};
+		3A6F9AC3202C939D0046F40E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2BT3HPN62Z;
+				INFOPLIST_FILE = "beats-preference-pane/Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.elastic.beats-preference-pane";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A6F9AAC202C939D0046F40E /* Build configuration list for PBXProject "beats-preference-pane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A6F9ABF202C939D0046F40E /* Debug */,
+				3A6F9AC0202C939D0046F40E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A6F9AC1202C939D0046F40E /* Build configuration list for PBXNativeTarget "beats-preference-pane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A6F9AC2202C939D0046F40E /* Debug */,
+				3A6F9AC3202C939D0046F40E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A6F9AA9202C939D0046F40E /* Project object */;
+}
