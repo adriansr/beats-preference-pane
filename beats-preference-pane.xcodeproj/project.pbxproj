@@ -7,17 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A34B24E203B1F480079E62C /* BeatManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34B24C203B1F480079E62C /* BeatManager.h */; };
+		3A34B251203B239F0079E62C /* Beats.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3A34B250203B239F0079E62C /* Beats.icns */; };
+		3A34B254203B26D90079E62C /* BeatMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34B252203B26D80079E62C /* BeatMock.h */; };
+		3A34B255203B26D90079E62C /* BeatMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34B253203B26D80079E62C /* BeatMock.m */; };
 		3A6F9AB6202C939D0046F40E /* beats_preference_pane.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6F9AB5202C939D0046F40E /* beats_preference_pane.h */; };
 		3A6F9AB8202C939D0046F40E /* beats_preference_pane.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6F9AB7202C939D0046F40E /* beats_preference_pane.m */; };
-		3A6F9ABA202C939D0046F40E /* beats_preference_pane.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3A6F9AB9202C939D0046F40E /* beats_preference_pane.tiff */; };
 		3A6F9ABD202C939D0046F40E /* beats_preference_pane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6F9ABB202C939D0046F40E /* beats_preference_pane.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A34B24C203B1F480079E62C /* BeatManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatManager.h; sourceTree = "<group>"; };
+		3A34B250203B239F0079E62C /* Beats.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Beats.icns; sourceTree = "<group>"; };
+		3A34B252203B26D80079E62C /* BeatMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatMock.h; sourceTree = "<group>"; };
+		3A34B253203B26D80079E62C /* BeatMock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatMock.m; sourceTree = "<group>"; };
 		3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "beats-preference-pane.prefPane"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6F9AB5202C939D0046F40E /* beats_preference_pane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = beats_preference_pane.h; sourceTree = "<group>"; };
 		3A6F9AB7202C939D0046F40E /* beats_preference_pane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = beats_preference_pane.m; sourceTree = "<group>"; };
-		3A6F9AB9202C939D0046F40E /* beats_preference_pane.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = beats_preference_pane.tiff; sourceTree = "<group>"; };
 		3A6F9ABC202C939D0046F40E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/beats_preference_pane.xib; sourceTree = "<group>"; };
 		3A6F9ABE202C939D0046F40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,11 +58,14 @@
 		3A6F9AB4202C939D0046F40E /* beats-preference-pane */ = {
 			isa = PBXGroup;
 			children = (
+				3A34B250203B239F0079E62C /* Beats.icns */,
 				3A6F9AB5202C939D0046F40E /* beats_preference_pane.h */,
 				3A6F9AB7202C939D0046F40E /* beats_preference_pane.m */,
-				3A6F9AB9202C939D0046F40E /* beats_preference_pane.tiff */,
 				3A6F9ABB202C939D0046F40E /* beats_preference_pane.xib */,
 				3A6F9ABE202C939D0046F40E /* Info.plist */,
+				3A34B24C203B1F480079E62C /* BeatManager.h */,
+				3A34B252203B26D80079E62C /* BeatMock.h */,
+				3A34B253203B26D80079E62C /* BeatMock.m */,
 			);
 			path = "beats-preference-pane";
 			sourceTree = "<group>";
@@ -68,6 +77,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A34B24E203B1F480079E62C /* BeatManager.h in Headers */,
+				3A34B254203B26D90079E62C /* BeatMock.h in Headers */,
 				3A6F9AB6202C939D0046F40E /* beats_preference_pane.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,8 +142,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A34B251203B239F0079E62C /* Beats.icns in Resources */,
 				3A6F9ABD202C939D0046F40E /* beats_preference_pane.xib in Resources */,
-				3A6F9ABA202C939D0046F40E /* beats_preference_pane.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6F9AB8202C939D0046F40E /* beats_preference_pane.m in Sources */,
+				3A34B255203B26D90079E62C /* BeatMock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +281,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2BT3HPN62Z;
+				DEVELOPMENT_TEAM = UZ3M9EEN74;
 				INFOPLIST_FILE = "beats-preference-pane/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.elastic.beats-preference-pane";
@@ -283,7 +295,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2BT3HPN62Z;
+				DEVELOPMENT_TEAM = UZ3M9EEN74;
 				INFOPLIST_FILE = "beats-preference-pane/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.elastic.beats-preference-pane";
