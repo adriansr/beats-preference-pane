@@ -21,12 +21,12 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2018 Elastic. All rights reserved.</string>
 	<key>NSMainNibFile</key>
-	<string>beats_preference_pane</string>
+	<string>BeatsPrefPane</string>
 	<key>NSPrefPaneIconFile</key>
 	<string>Beats.icns</string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>Beats</string>
 	<key>NSPrincipalClass</key>
-	<string>beats_preference_pane</string>
+	<string>BeatsPrefPane</string>
 </dict>
 </plist>

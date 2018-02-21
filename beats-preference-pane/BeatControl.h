@@ -17,7 +17,7 @@
 - (void) uninstall;
 @end
 
-@protocol BeatManager
+@protocol BeatControl
 - (NSArray*) listBeats;
-- (id <Beat>)getBeat:(NSString*)name;
+//- (id <Beat>)getBeat:(NSString*)name;
 @end
