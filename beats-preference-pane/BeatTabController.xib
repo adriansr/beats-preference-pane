@@ -8,7 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BeatTabController">
             <connections>
-                <outlet property="text" destination="P8r-yk-VlO" id="Je8-i2-Peb"/>
                 <outlet property="textField" destination="P8r-yk-VlO" id="Kq3-Xj-rFt"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
