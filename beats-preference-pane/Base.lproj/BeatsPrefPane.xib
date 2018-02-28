@@ -55,14 +55,11 @@
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
-                    <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jRa-yp-9Xb" customClass="SFAuthorizationView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jRa-yp-9Xb" customClass="SFAuthorizationView">
                         <rect key="frame" x="20" y="20" width="628" height="40"/>
+                        <autoresizingMask key="autoresizingMask"/>
                     </customView>
                 </subviews>
-                <constraints>
-                    <constraint firstAttribute="bottom" secondItem="jRa-yp-9Xb" secondAttribute="bottom" constant="20" symbolic="YES" id="FqT-9R-JLZ"/>
-                    <constraint firstItem="jRa-yp-9Xb" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="308" id="KWe-sL-Zfs"/>
-                </constraints>
             </view>
             <point key="canvasLocation" x="30" y="271"/>
         </window>
