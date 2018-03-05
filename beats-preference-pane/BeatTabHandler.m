@@ -35,8 +35,9 @@
         [item setLabel:name];
         BeatTabController *tc = [[BeatTabController alloc]
                                  initWithBeat:beat andBundle:bundle];
-        NSView *view = [tc view];
-        [item setView:view];
+        [item setViewController:tc];
+        //NSView *view = [tc view];
+        //[item setView:view];
         [tabView addTabViewItem:item];
     }
     // TODO: Zero items

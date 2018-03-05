@@ -17,5 +17,7 @@
 }
 
 - (id)initWithBeat:(id<Beat>)_ andBundle:(NSBundle*)_;
+- (void)toggleRunAtLoad;
+- (IBAction)buttonTapped:(id)sender;
 
 @end

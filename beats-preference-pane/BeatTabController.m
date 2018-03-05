@@ -15,7 +15,6 @@
 
 //NSString *plistPath = @"/Library/LaunchDaemons/co.elastic.beats.packetbeat.plist";
 NSString *plistPath = @"/tmp/plist";
-NSString *outPath = @"/tmp/plist.out";
 
 @implementation BeatTabController
 
@@ -38,7 +37,13 @@ NSString *outPath = @"/tmp/plist.out";
     [textField setStringValue:
      [NSString stringWithFormat:@"%@ is %@", [beat name],
       [beat isRunning]? @"running" : @"stopped"]];
+}
 
+- (IBAction)buttonTapped:(id)sender {
+    [self toggleRunAtLoad];
+}
+
+- (void)toggleRunAtLoad {
     NSPropertyListMutabilityOptions opts = NSPropertyListMutableContainersAndLeaves;
     NSPropertyListFormat format = 0;
     NSError *err = nil;
@@ -89,7 +94,7 @@ NSString *outPath = @"/tmp/plist.out";
     [output close];
 
     NSData *data = [output propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
-    BOOL success = [data writeToFile:outPath atomically:YES];
+    BOOL success = [data writeToFile:plistPath atomically:YES];
     struct timeval tv;
     gettimeofday(&tv, NULL);
     [self fail:[NSString stringWithFormat:@"format %x %@->%@ %db %@ (%@@%ld)", (unsigned int)format,
