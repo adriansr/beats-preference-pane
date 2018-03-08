@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-#import "BeatControl.h"
+#import "beats/Beats.h"
 
 @interface BeatTabHandler : NSObject <NSTabViewDelegate> {
-    id <BeatControl> mgr;
+    id <Beats> beatsMgr;
     NSBundle *bundle;
 }
-- (id) initWithManager:(id <BeatControl>)_ andBundle:(NSBundle*)_;
+- (id) initWithManager:(id <Beats>)_ andBundle:(NSBundle*)_;
 - (void) updateTabs:(NSTabView*)_;
 
 // NSTabViewDelegate

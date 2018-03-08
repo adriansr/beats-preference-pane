@@ -9,15 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @protocol Beat
-- (bool)isRunning;
-- (NSString*)name;
+- (bool) isRunning;
+- (int) pid;
+- (NSString*) name;
 - (NSString*) configFile;
 - (void) start;
 - (void) stop;
 - (void) uninstall;
+
 @end
 
-@protocol BeatControl
+@protocol Beats
 - (NSArray*) listBeats;
-//- (id <Beat>)getBeat:(NSString*)name;
+- (id <Beat>)getBeat:(NSString*)name;
 @end

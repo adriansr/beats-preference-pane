@@ -11,10 +11,10 @@
 #import "common.h"
 
 @implementation BeatTabHandler
-- (id) initWithManager:(id <BeatControl>) mgr andBundle:(NSBundle*)bundle
+- (id) initWithManager:(id <Beats>) mgr andBundle:(NSBundle*)bundle
 {
     if (self = [super init]) {
-        self->mgr = mgr;
+        self->beatsMgr = mgr;
         self->bundle = bundle;
     }
     return self;
@@ -27,7 +27,7 @@
     for (i=0, items = tabView.tabViewItems; items != nil && i < items.count; i++) {
         [tabView removeTabViewItem:[items objectAtIndex:i]];
     }
-    NSArray *beats = [mgr listBeats];
+    NSArray *beats = [beatsMgr listBeats];
     for (uint i=0; i < beats.count; i++) {
         id <Beat> beat = [beats objectAtIndex:i];
         NSString *name = [beat name];

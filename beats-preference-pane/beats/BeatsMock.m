@@ -6,8 +6,7 @@
 //  Copyright © 2018 Elastic. All rights reserved.
 //
 
-#import "BeatControlMock.h"
-
+#import "BeatsMock.h"
 
 @interface FakeBeat : NSObject {
     NSString *name;
@@ -19,7 +18,7 @@
 + (id) beatWithName:(NSString*)_ andRunning:(bool)_;
 @end
 
-@implementation BeatControlMock
+@implementation BeatsMock
 
 - (NSArray*) listBeats {
     return [NSArray arrayWithObjects:
@@ -27,6 +26,10 @@
             [FakeBeat beatWithName:@"filebeat" andRunning:false],
             [FakeBeat beatWithName:@"metricbeat" andRunning:true],
             nil];
+}
+
+- (id <Beat>) getBeat:(NSString *)name {
+    return [FakeBeat beatWithName:name andRunning:false];
 }
 
 @end

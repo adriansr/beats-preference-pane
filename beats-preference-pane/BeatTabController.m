@@ -40,7 +40,12 @@ NSString *plistPath = @"/tmp/plist";
 }
 
 - (IBAction)buttonTapped:(id)sender {
+    struct timeval start, end, took;
+    gettimeofday(&start, NULL);
     [self toggleRunAtLoad];
+    gettimeofday(&end, NULL);
+    timersub(&end, &start, &took);
+    NSLog(@"took %lu:%u", took.tv_sec, took.tv_usec);
 }
 
 - (void)toggleRunAtLoad {

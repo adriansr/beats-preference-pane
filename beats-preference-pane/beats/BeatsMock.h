@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BeatControl.h"
+#import "Beats.h"
 
-@interface BeatControlMock : NSObject <BeatControl>
+@interface BeatsMock : NSObject <Beats>
 - (NSArray*) listBeats;
-//- (id <Beat>)getBeat:(NSString*)name;
+- (id <Beat>)getBeat:(NSString*)name;
 @end

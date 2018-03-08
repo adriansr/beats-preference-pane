@@ -7,14 +7,14 @@
 //
 
 #import "BeatsPrefPane.h"
-#import "BeatControlMock.h"
+#import "BeatsMock.h"
 
 @implementation BeatsPrefPane
 - (id)initWithBundle:(NSBundle *)bundle
 {
     if ( ( self = [super initWithBundle:bundle] ) != nil ) {
         tabHandler = [[BeatTabHandler alloc]
-            initWithManager:[BeatControlMock alloc]
+            initWithManager:[[BeatsMock alloc] init]
             andBundle:[self bundle]];
     }
 
