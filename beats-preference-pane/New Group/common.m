@@ -8,6 +8,7 @@
 
 #import "common.h"
 #import <Cocoa/Cocoa.h>
+#import <sys/time.h>
 
 void alert(NSString *fmt, ...) {
     va_list args;
@@ -63,4 +64,10 @@ int launchTask(NSString *path, NSArray* args, BOOL (^callback)(NSString*)) {
     [fHandle closeFile];
     [task waitUntilExit];
     return [task terminationStatus];
+}
+
+uint64_t getTimeMicroseconds(void) {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec*1000000 + tv.tv_usec;
 }

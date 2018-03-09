@@ -74,11 +74,21 @@ static NSString *empty = @"";
 }
 
 - (NSArray *)listBeats {
+    uint64_t elapsed = getTimeMicroseconds();
+    NSArray *result = [self doListBeats];
+    if (result != nil) {
+        elapsed = getTimeMicroseconds() - elapsed;
+        NSLog(@"ListBeats took %llu us", elapsed);
+    }
+    return result;
+}
+
+- (NSArray *)doListBeats {
     NSError *error = nil;
     NSArray* contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:launchDaemonsPath
                                                                             error:&error];
     if (error != nil) {
-        NSLog(@"Unable to list installed beats: %@", [error localizedDescription]);
+        NSLog(@"Error: Unable to list installed beats: %@", [error localizedDescription]);
         return nil;
     }
     NSMutableArray *beats = [[NSMutableArray alloc] init];
@@ -87,14 +97,14 @@ static NSString *empty = @"";
     
     [contents enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *filename = (NSString *)obj;
-        NSLog(@"Got daemon '%@'", filename);
+        //NSLog(@"Got daemon '%@'", filename);
         NSUInteger nameLength =[filename length];
         if ([filename hasPrefix:self->prefix]
              && nameLength > prefixLength + extensionLength + 2
              && [filename characterAtIndex:prefixLength] == '.'
              && [[[filename pathExtension] lowercaseString] isEqualToString:plistExtension]) {
             NSString *beatName = [filename substringWithRange:NSMakeRange(prefixLength+1, nameLength - prefixLength - extensionLength - 2)];
-            NSLog(@"Found beat '%@'", beatName);
+            //NSLog(@"Found beat '%@'", beatName);
             [beats addObject:beatName];
         }
     }];
@@ -127,6 +137,16 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
 }
 
 - (id<Beat>)getBeat:(NSString *)name {
+    uint64_t elapsed = getTimeMicroseconds();
+    id result = [self doGetBeat:name];
+    if (result != nil) {
+        elapsed = getTimeMicroseconds() - elapsed;
+        NSLog(@"GetBeat took %llu us", elapsed);
+    }
+    return result;
+}
+
+- (id<Beat>)doGetBeat:(NSString *)name {
     // Get launch daemon runtime info (only if running)
     NSString *label = [NSString stringWithFormat:@"system/%@.%@", self->prefix, name];
     NSSet *wantedKeys = [NSSet setWithObjects:@"pid", @"state", @"path", nil];
@@ -179,7 +199,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     for (unsigned long i = 0, count = [args count]; i < count; i++) {
         NSString *arg = [args objectAtIndex:i];
         if (key != nil) {
-            NSLog(@"Found argument '%@' = '%@'", key, arg);
+            //NSLog(@"Found argument '%@' = '%@'", key, arg);
             argsDict[key] = arg;
             key = nil;
         } else if ([arg characterAtIndex:0] == '-') {

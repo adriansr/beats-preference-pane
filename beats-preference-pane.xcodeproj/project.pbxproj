@@ -76,6 +76,7 @@
 		3A6F9AB4202C939D0046F40E /* beats-preference-pane */ = {
 			isa = PBXGroup;
 			children = (
+				3AA415D4205353FE008915AA /* common */,
 				3AA415C9205159E1008915AA /* beats */,
 				3AD0D41F203D791100338653 /* BeatTabController.xib */,
 				3A34B250203B239F0079E62C /* Beats.icns */,
@@ -87,8 +88,6 @@
 				3AD0D412203CE40800338653 /* BeatTabController.m */,
 				3AD0D417203CECDA00338653 /* BeatTabHandler.h */,
 				3AD0D418203CECDA00338653 /* BeatTabHandler.m */,
-				3AD0D41B203CEDD000338653 /* common.h */,
-				3AD0D41C203CEDD000338653 /* common.m */,
 			);
 			path = "beats-preference-pane";
 			sourceTree = "<group>";
@@ -103,6 +102,16 @@
 				3AA415CD2051B206008915AA /* BeatsService.m */,
 			);
 			path = beats;
+			sourceTree = "<group>";
+		};
+		3AA415D4205353FE008915AA /* common */ = {
+			isa = PBXGroup;
+			children = (
+				3AD0D41B203CEDD000338653 /* common.h */,
+				3AD0D41C203CEDD000338653 /* common.m */,
+			);
+			name = common;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
