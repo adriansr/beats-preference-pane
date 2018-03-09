@@ -7,14 +7,18 @@
 //
 
 #import "BeatsPrefPane.h"
-#import "BeatsMock.h"
+#import "beats/BeatsMock.h"
+#import "beats/BeatsService.h"
+
+static NSString *beatsPrefix = @"co.elastic.beats";
 
 @implementation BeatsPrefPane
 - (id)initWithBundle:(NSBundle *)bundle
 {
     if ( ( self = [super initWithBundle:bundle] ) != nil ) {
         tabHandler = [[BeatTabHandler alloc]
-            initWithManager:[[BeatsMock alloc] init]
+            //initWithManager:[[BeatsMock alloc] init]
+            initWithManager:[[BeatsService alloc] initWithPrefix:beatsPrefix]
             andBundle:[self bundle]];
     }
 
@@ -49,7 +53,7 @@
 }
 
 - (void)updateUI {
-    [tabHandler updateTabs:beatsTab];
+    [messageLabel setHidden:[tabHandler updateTabs:beatsTab]];
 }
 
 //- (BOOL)isUnlocked {

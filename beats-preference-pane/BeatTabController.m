@@ -33,10 +33,20 @@ NSString *plistPath = @"/tmp/plist";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
-    [textField setStringValue:
-     [NSString stringWithFormat:@"%@ is %@", [beat name],
-      [beat isRunning]? @"running" : @"stopped"]];
+    [self updateUI];
+}
+
+- (void)updateUI {
+    
+    // State line
+    NSString *stateLine;
+    if ([beat isRunning]) {
+        stateLine = [NSString stringWithFormat:@"%@ is running with PID %d", [beat name], [beat pid]];
+    } else {
+        stateLine = [NSString stringWithFormat:@"%@ is stopped", [beat name]];
+    }
+    [textField setStringValue:stateLine];
+
 }
 
 - (IBAction)buttonTapped:(id)sender {

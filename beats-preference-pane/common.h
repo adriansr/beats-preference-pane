@@ -9,3 +9,4 @@
 #import <Foundation/Foundation.h>
 
 void alert(NSString *fmt, ...);
+int launchTask(NSString *path, NSArray *args, BOOL (^callback)(NSString*));

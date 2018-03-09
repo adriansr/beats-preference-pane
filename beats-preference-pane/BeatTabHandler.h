@@ -16,7 +16,7 @@
     NSBundle *bundle;
 }
 - (id) initWithManager:(id <Beats>)_ andBundle:(NSBundle*)_;
-- (void) updateTabs:(NSTabView*)_;
+- (BOOL) updateTabs:(NSTabView*)_;
 
 // NSTabViewDelegate
 - (void) tabViewDidChangeNumberOfTabViewItems:(NSTabView*)_;

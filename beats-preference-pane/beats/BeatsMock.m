@@ -22,9 +22,9 @@
 
 - (NSArray*) listBeats {
     return [NSArray arrayWithObjects:
-            [FakeBeat beatWithName:@"packetbeat" andRunning:true],
-            [FakeBeat beatWithName:@"filebeat" andRunning:false],
-            [FakeBeat beatWithName:@"metricbeat" andRunning:true],
+            @"packetbeat",
+            @"filebeat",
+            @"metricbeat",
             nil];
 }
 

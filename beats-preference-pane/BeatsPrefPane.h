@@ -16,7 +16,6 @@
     IBOutlet BeatTabHandler *tabHandler;
     IBOutlet SFAuthorizationView *authView;
     IBOutlet NSTextField *messageLabel;
-    //IBOutlet NSWindow *_window;
 }
 
 - (id)initWithBundle:(NSBundle *)bundle;

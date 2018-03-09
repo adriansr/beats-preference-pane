@@ -20,7 +20,7 @@
     return self;
 }
 
-- (void) updateTabs:(NSTabView*)tabView
+- (BOOL) updateTabs:(NSTabView*)tabView
 {
     uint i;
     NSArray *items;
@@ -29,18 +29,15 @@
     }
     NSArray *beats = [beatsMgr listBeats];
     for (uint i=0; i < beats.count; i++) {
-        id <Beat> beat = [beats objectAtIndex:i];
-        NSString *name = [beat name];
-        NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:name];
-        [item setLabel:name];
+        NSString *beatName = [beats objectAtIndex:i];
+        NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
+        [item setLabel:beatName];
         BeatTabController *tc = [[BeatTabController alloc]
-                                 initWithBeat:beat andBundle:bundle];
+                                 initWithBeat:[beatsMgr getBeat:beatName] andBundle:bundle];
         [item setViewController:tc];
-        //NSView *view = [tc view];
-        //[item setView:view];
         [tabView addTabViewItem:item];
     }
-    // TODO: Zero items
+    return beats.count > 0;
 }
 
 - (void) tabViewDidChangeNumberOfTabViewItems:(NSTabView*) tabView
