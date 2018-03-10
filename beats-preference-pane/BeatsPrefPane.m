@@ -11,6 +11,7 @@
 #import "beats/BeatsService.h"
 
 static NSString *beatsPrefix = @"co.elastic.beats";
+static const double UPDATE_INTERVAL = 1.0;
 
 @implementation BeatsPrefPane
 - (id)initWithBundle:(NSBundle *)bundle
@@ -20,6 +21,7 @@ static NSString *beatsPrefix = @"co.elastic.beats";
             //initWithManager:[[BeatsMock alloc] init]
             initWithManager:[[BeatsService alloc] initWithPrefix:beatsPrefix]
             andBundle:[self bundle]];
+        updateTimer = nil;
     }
 
     return self;
@@ -44,12 +46,15 @@ static NSString *beatsPrefix = @"co.elastic.beats";
 - (void)didSelect
 {
     [self updateUI];
+    updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL repeats:YES block:^(NSTimer*_) {
+        [tabHandler updateSelectedTab];
+    }];
 }
-
 
 - (void)didUnselect
 {
-    // TODO
+    [updateTimer invalidate];
+    updateTimer = nil;
 }
 
 - (void)updateUI {

@@ -20,6 +20,17 @@
     return self;
 }
 
+- (void) updateSelectedTab {
+    uint64_t elapsed = getTimeMicroseconds();
+    if (selectedTab) {
+        BeatTabController *controller = (BeatTabController*) selectedTab;
+        controller.beat = [beatsMgr getBeat:controller.beat.name];
+        [controller updateUI];
+    }
+    elapsed = getTimeMicroseconds() - elapsed;
+    NSLog(@"Update timer took %lld us", elapsed);
+}
+
 - (BOOL) updateTabs:(NSTabView*)tabView
 {
     uint i;
@@ -52,13 +63,11 @@
 
 - (void) tabView:(NSTabView*)tabView willSelectTabViewItem:(NSTabViewItem*)item
 {
-    //[item setView:[self view]];
-    //alert(@"here?");
 }
 
 - (void) tabView:(NSTabView*)tabView didSelectTabViewItem:(NSTabViewItem*)item
 {
-    // TODO
+    selectedTab = [item viewController];
 }
 
 @end

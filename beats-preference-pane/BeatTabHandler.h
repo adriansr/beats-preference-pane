@@ -14,9 +14,11 @@
 @interface BeatTabHandler : NSObject <NSTabViewDelegate> {
     id <Beats> beatsMgr;
     NSBundle *bundle;
+    id selectedTab;
 }
 - (id) initWithManager:(id <Beats>)_ andBundle:(NSBundle*)_;
 - (BOOL) updateTabs:(NSTabView*)_;
+- (void) updateSelectedTab;
 
 // NSTabViewDelegate
 - (void) tabViewDidChangeNumberOfTabViewItems:(NSTabView*)_;

@@ -22,7 +22,7 @@ NSString *plistPath = @"/tmp/plist";
           andBundle:(NSBundle*)bundle
 {
     if (self = [self initWithNibName:nil bundle:bundle]) {
-        self->beat = beat;
+        self->_beat = beat;
     }
     return self;
 }
@@ -37,7 +37,7 @@ NSString *plistPath = @"/tmp/plist";
 }
 
 - (void)updateUI {
-    
+    id<Beat> beat = [self beat];
     // State line
     NSString *stateLine;
     if ([beat isRunning]) {
@@ -50,14 +50,15 @@ NSString *plistPath = @"/tmp/plist";
 }
 
 - (IBAction)buttonTapped:(id)sender {
-    struct timeval start, end, took;
+    /*struct timeval start, end, took;
     gettimeofday(&start, NULL);
     [self toggleRunAtLoad];
     gettimeofday(&end, NULL);
     timersub(&end, &start, &took);
-    NSLog(@"took %lu:%u", took.tv_sec, took.tv_usec);
+    NSLog(@"took %lu:%u", took.tv_sec, took.tv_usec);*/
 }
 
+/*
 - (void)toggleRunAtLoad {
     NSPropertyListMutabilityOptions opts = NSPropertyListMutableContainersAndLeaves;
     NSPropertyListFormat format = 0;
@@ -115,6 +116,6 @@ NSString *plistPath = @"/tmp/plist";
     [self fail:[NSString stringWithFormat:@"format %x %@->%@ %db %@ (%@@%ld)", (unsigned int)format,
                 before, after, (unsigned int)nbytes, success? @"YES":@"NO", [beat name], tv.tv_sec]];
 
-}
+}*/
 
 @end

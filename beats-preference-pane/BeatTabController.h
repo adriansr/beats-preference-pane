@@ -12,12 +12,13 @@
 
 @interface BeatTabController : NSViewController
 {
-    id<Beat> beat;
     IBOutlet NSTextField *textField;
 }
+@property (atomic) id<Beat> beat;
 
 - (id)initWithBeat:(id<Beat>)_ andBundle:(NSBundle*)_;
-- (void)toggleRunAtLoad;
+//- (void)toggleRunAtLoad;
 - (IBAction)buttonTapped:(id)sender;
+- (void)updateUI;
 
 @end

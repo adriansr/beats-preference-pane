@@ -16,6 +16,7 @@
     IBOutlet BeatTabHandler *tabHandler;
     IBOutlet SFAuthorizationView *authView;
     IBOutlet NSTextField *messageLabel;
+    NSTimer *updateTimer;
 }
 
 - (id)initWithBundle:(NSBundle *)bundle;
@@ -23,5 +24,4 @@
 - (void)didSelect;
 - (void)willSelect;
 - (void)didUnselect;
-
 @end
