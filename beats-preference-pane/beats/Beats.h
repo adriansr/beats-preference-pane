@@ -10,9 +10,11 @@
 
 @protocol Beat
 - (bool) isRunning;
+- (bool) isBoot;
 - (int) pid;
 - (NSString*) name;
 - (NSString*) configFile;
+- (NSString*) logsPath;
 - (void) start;
 - (void) stop;
 - (void) uninstall;

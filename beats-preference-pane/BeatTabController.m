@@ -28,12 +28,16 @@ NSString *plistPath = @"/tmp/plist";
 }
 
 - (void)fail:(NSString*)msg {
-    [textField setStringValue:msg];
+    [statusField setStringValue:msg];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self updateUI];
+}
+
+NSString *strOrNil(NSString *str) {
+    return str != nil? str : @"(nil)";
 }
 
 - (void)updateUI {
@@ -45,8 +49,9 @@ NSString *plistPath = @"/tmp/plist";
     } else {
         stateLine = [NSString stringWithFormat:@"%@ is stopped", [beat name]];
     }
-    [textField setStringValue:stateLine];
-
+    [statusField setStringValue:stateLine];
+    [configField setStringValue:strOrNil([beat configFile])];
+    [startButton setStringValue:([beat isBoot]? @"Enable" : @"Disable")];
 }
 
 - (IBAction)buttonTapped:(id)sender {

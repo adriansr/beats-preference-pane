@@ -16,8 +16,10 @@ static NSString *empty = @"";
 
 @interface ConcreteBeat : NSObject <Beat> {
     @public NSString *config;
+    @public NSString *logs;
     @public NSString *name;
     @public bool running;
+    @public bool startAtBoot;
     @public pid_t pid;
 }
 - (id) initWithName:(NSString *)name;
@@ -29,7 +31,9 @@ static NSString *empty = @"";
     if (self = [self init]) {
         self->name = name;
         self->config = nil;
+        self->logs = nil;
         self->running = false;
+        self->startAtBoot = false;
         self->pid = 0;
     }
     return self;
@@ -63,7 +67,16 @@ static NSString *empty = @"";
     // TODO
 }
 
+- (NSString *)logsPath {
+    return self->logs;
+}
+
+- (bool)isBoot {
+    return self->startAtBoot;
+}
+
 @end
+
 @implementation BeatsService
 
 - (id)initWithPrefix:(NSString*)prefix {
@@ -192,7 +205,8 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     }
     [plistFile close];
     
-    // TODO: RunAtLoad
+    NSNumber *runAtLoad = plist[@"RunAtLoad"];
+    beat->startAtBoot = runAtLoad != nil && [runAtLoad boolValue] == YES;
     NSArray *args = plist[@"ProgramArguments"];
     NSMutableDictionary *argsDict = [NSMutableDictionary new];
     NSString *key = nil;
@@ -208,6 +222,13 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     }
     
     beat->config = argsDict[@"-c"];
+    if (beat->config == nil) {
+        beat->config = [NSString stringWithFormat:@"/etc/%@/%@.yml", name, name];
+    }
+    beat->logs = argsDict[@"--path.logs"];
+    if (beat->logs == nil) {
+        beat->logs = [NSString stringWithFormat:@"/var/log/%@", name];
+    }
     return beat;
 }
 
