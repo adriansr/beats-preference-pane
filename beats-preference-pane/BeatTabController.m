@@ -28,7 +28,7 @@ NSString *plistPath = @"/tmp/plist";
 }
 
 - (void)fail:(NSString*)msg {
-    [statusField setStringValue:msg];
+    [statusLabel setStringValue:msg];
 }
 
 - (void)viewDidLoad {
@@ -42,16 +42,25 @@ NSString *strOrNil(NSString *str) {
 
 - (void)updateUI {
     id<Beat> beat = [self beat];
-    // State line
-    NSString *stateLine;
+
     if ([beat isRunning]) {
-        stateLine = [NSString stringWithFormat:@"%@ is running with PID %d", [beat name], [beat pid]];
+        [statusLabel setStringValue:[NSString stringWithFormat:@"%@ is running with PID %d", [beat name], [beat pid]]];
+        [startStopButton setTitle:@"Stop"];
     } else {
-        stateLine = [NSString stringWithFormat:@"%@ is stopped", [beat name]];
+        [statusLabel setStringValue:[NSString stringWithFormat:@"%@ is stopped", [beat name]]];
+        [startStopButton setTitle:@"Start"];
     }
-    [statusField setStringValue:stateLine];
+    
+    if ([beat isBoot]) {
+        [bootLabel setStringValue:@"Beat will start at boot"];
+        [bootButton setTitle:@"Disable"];
+    } else {
+        [bootLabel setStringValue:@"Beat will not start at boot"];
+        [bootButton setTitle:@"Enable"];
+    }
     [configField setStringValue:strOrNil([beat configFile])];
-    [startButton setStringValue:([beat isBoot]? @"Enable" : @"Disable")];
+    [logsField setStringValue:strOrNil([beat logsPath])];
+    
 }
 
 - (IBAction)buttonTapped:(id)sender {

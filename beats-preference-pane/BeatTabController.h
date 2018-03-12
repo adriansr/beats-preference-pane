@@ -12,9 +12,12 @@
 
 @interface BeatTabController : NSViewController
 {
-    IBOutlet NSTextField *statusField;
+    IBOutlet NSTextField *statusLabel;
+    IBOutlet NSTextField *bootLabel;
     IBOutlet NSTextField *configField;
-    IBOutlet NSButton *startButton;
+    IBOutlet NSTextField *logsField;
+    IBOutlet NSButton *startStopButton;
+    IBOutlet NSButton *bootButton;
 }
 @property (atomic) id<Beat> beat;
 
