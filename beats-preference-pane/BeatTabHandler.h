@@ -10,15 +10,19 @@
 #import <Cocoa/Cocoa.h>
 
 #import "beats/Beats.h"
+#import "Authorization.h"
 
 @interface BeatTabHandler : NSObject <NSTabViewDelegate> {
     id <Beats> beatsMgr;
     NSBundle *bundle;
+    id auth;
     id selectedTab;
 }
-- (id) initWithManager:(id <Beats>)_ andBundle:(NSBundle*)_;
+- (id) initWithManager:(id <Beats>)_ bundle:(NSBundle*)_ auth:(id<AuthorizationProvider>)_;
+- (void) update;
+// TODO: get rid of
 - (BOOL) updateTabs:(NSTabView*)_;
-- (void) updateSelectedTab;
+//- (void) updateSelectedTab:(BOOL) isUnlocked;
 
 // NSTabViewDelegate
 - (void) tabViewDidChangeNumberOfTabViewItems:(NSTabView*)_;

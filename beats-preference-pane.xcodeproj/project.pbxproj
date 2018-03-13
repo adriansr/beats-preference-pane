@@ -37,6 +37,7 @@
 		3A6F9ABE202C939D0046F40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AA415CC2051B206008915AA /* BeatsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsService.h; sourceTree = "<group>"; };
 		3AA415CD2051B206008915AA /* BeatsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsService.m; sourceTree = "<group>"; };
+		3AA415D520572B5A008915AA /* Authorization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Authorization.h; sourceTree = "<group>"; };
 		3AD0D411203CE40800338653 /* BeatTabController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatTabController.h; sourceTree = "<group>"; };
 		3AD0D412203CE40800338653 /* BeatTabController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatTabController.m; sourceTree = "<group>"; };
 		3AD0D417203CECDA00338653 /* BeatTabHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatTabHandler.h; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 				3AD0D412203CE40800338653 /* BeatTabController.m */,
 				3AD0D417203CECDA00338653 /* BeatTabHandler.h */,
 				3AD0D418203CECDA00338653 /* BeatTabHandler.m */,
+				3AA415D520572B5A008915AA /* Authorization.h */,
 			);
 			path = "beats-preference-pane";
 			sourceTree = "<group>";

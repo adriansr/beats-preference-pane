@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "../Authorization.h"
 
 @protocol Beat
 - (bool) isRunning;
@@ -15,10 +16,9 @@
 - (NSString*) name;
 - (NSString*) configFile;
 - (NSString*) logsPath;
-- (void) start;
-- (void) stop;
-- (void) uninstall;
-
+- (BOOL) startWithAuth:(id<AuthorizationProvider>)auth;
+- (BOOL) stopWithAuth:(id<AuthorizationProvider>)auth;
+- (BOOL) uninstall;
 @end
 
 @protocol Beats

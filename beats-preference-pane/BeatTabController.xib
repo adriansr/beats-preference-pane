@@ -49,7 +49,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="buttonTapped:" target="-2" id="XWK-l5-UFv"/>
+                        <action selector="startStopTapped:" target="-2" id="aUi-Ca-fOB"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MjM-JV-S7c">

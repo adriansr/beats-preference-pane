@@ -11,7 +11,7 @@
 
 static NSString *launchDaemonsPath = @"/Library/LaunchDaemons";
 static NSString *plistExtension = @"plist";
-static NSString *launchCtl = @"/bin/launchctl";
+static NSString *launchctlPath = @"/bin/launchctl";
 static NSString *empty = @"";
 
 @interface ConcreteBeat : NSObject <Beat> {
@@ -21,15 +21,17 @@ static NSString *empty = @"";
     @public bool running;
     @public bool startAtBoot;
     @public pid_t pid;
+    NSString *prefix;
 }
-- (id) initWithName:(NSString *)name;
+- (id) initWithPrefix:(NSString*)prefix andName:(NSString*)name;
 @end
 
 @implementation ConcreteBeat
 
-- (id) initWithName:(NSString *)name {
+- (id) initWithPrefix:(NSString*)prefix andName:(NSString *)name {
     if (self = [self init]) {
         self->name = name;
+        self->prefix = prefix;
         self->config = nil;
         self->logs = nil;
         self->running = false;
@@ -55,16 +57,9 @@ static NSString *empty = @"";
     return self->pid;
 }
 
-- (void)start {
+- (BOOL)uninstall {
     // TODO
-}
-
-- (void)stop {
-    // TODO
-}
-
-- (void)uninstall {
-    // TODO
+    return NO;
 }
 
 - (NSString *)logsPath {
@@ -74,6 +69,46 @@ static NSString *empty = @"";
 - (bool)isBoot {
     return self->startAtBoot;
 }
+
+- (NSString*) serviceName {
+    return [NSString stringWithFormat:@"%@.%@", prefix, name];
+}
+
+- (NSString*) serviceNameWithDomain {
+    return [NSString stringWithFormat:@"system/%@", [self serviceName]];
+}
+
+BOOL runLaunchctlChain(id<AuthorizationProvider> auth, NSArray *argList) {
+    BOOL __block failed = YES;
+    [argList enumerateObjectsUsingBlock:^(id obj, NSUInteger _, BOOL *stop) {
+        NSArray *args = (NSArray*)obj;
+        int res = [auth runAsRoot:launchctlPath args:args];
+        if (res != 0) {
+            NSLog(@"Error: command `%@ %@` failed with code %d",
+                  launchctlPath, [args componentsJoinedByString:@" "], res);
+            *stop = failed = YES;
+        }
+    }];
+    return !failed;
+}
+
+- (BOOL)startWithAuth:(id<AuthorizationProvider>)auth {
+    return runLaunchctlChain(auth,@[
+        @[ @"enable", [self serviceNameWithDomain]],
+        // this still doesn't work, needs the process to be setuid(0)
+        @[ @"asuser", @"root", launchctlPath, @"start", [self serviceName]],
+        @[ @"print", [self serviceNameWithDomain]]
+    ]);
+}
+
+- (BOOL)stopWithAuth:(id<AuthorizationProvider>)auth {
+    return runLaunchctlChain(auth,@[
+        @[ @"disable", [self serviceNameWithDomain]],
+        @[ @"asuser", @"0", launchctlPath, @"stop", [self serviceName]],
+        @[ @"print", [self serviceNameWithDomain]]
+    ]);
+}
+
 
 @end
 
@@ -138,7 +173,7 @@ NSString *parseLine(NSString *line, NSString **data) {
 
 NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:[keys count]];
-    launchTask(launchCtl, @[@"print", label], ^(NSString *line) {
+    launchTask(launchctlPath, @[@"print", label], ^(NSString *line) {
         NSString *value;
         NSString *key = parseLine(line, &value);
         if (key != nil && [keys containsObject:key]) {
@@ -169,7 +204,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
         NSLog(@"Error: launch daemon %@ not installed", name);
         return nil;
     }
-    ConcreteBeat *beat = [[ConcreteBeat alloc] initWithName:name];
+    ConcreteBeat *beat = [[ConcreteBeat alloc] initWithPrefix:prefix andName:name];
     if (dict[@"pid"]) {
         beat->pid = [ (NSString*)dict[@"pid"] intValue];
     }

@@ -7,7 +7,7 @@
 //
 
 #import "BeatTabController.h"
-#include <sys/time.h>
+#include "common.h"
 
 @interface BeatTabController ()
 
@@ -19,10 +19,12 @@ NSString *plistPath = @"/tmp/plist";
 @implementation BeatTabController
 
 - (id) initWithBeat:(id<Beat>)beat
-          andBundle:(NSBundle*)bundle
+             bundle:(NSBundle*)bundle
+               auth:(id<AuthorizationProvider>)auth
 {
     if (self = [self initWithNibName:nil bundle:bundle]) {
-        self->_beat = beat;
+        self->beat = beat;
+        self->auth = auth;
     }
     return self;
 }
@@ -41,8 +43,8 @@ NSString *strOrNil(NSString *str) {
 }
 
 - (void)updateUI {
-    id<Beat> beat = [self beat];
-
+    id<Beat> beat = self->beat;
+    
     if ([beat isRunning]) {
         [statusLabel setStringValue:[NSString stringWithFormat:@"%@ is running with PID %d", [beat name], [beat pid]]];
         [startStopButton setTitle:@"Stop"];
@@ -61,17 +63,32 @@ NSString *strOrNil(NSString *str) {
     [configField setStringValue:strOrNil([beat configFile])];
     [logsField setStringValue:strOrNil([beat logsPath])];
     
+    BOOL unlocked = [auth isUnlocked];
+    
+    [startStopButton setEnabled:unlocked];
+    [bootButton setEnabled:unlocked];
 }
 
-- (IBAction)buttonTapped:(id)sender {
-    /*struct timeval start, end, took;
-    gettimeofday(&start, NULL);
-    [self toggleRunAtLoad];
-    gettimeofday(&end, NULL);
-    timersub(&end, &start, &took);
-    NSLog(@"took %lu:%u", took.tv_sec, took.tv_usec);*/
+- (IBAction)startStopTapped:(id)sender {
+    uint64_t took = getTimeMicroseconds();
+    id<Beat> beat = self->beat;
+    
+    if ([beat isRunning]) {
+        [beat stopWithAuth:auth];
+    } else {
+        [beat startWithAuth:auth];
+    }
+    took = getTimeMicroseconds() - took;
+    NSLog(@"start/stop took %lld us", took);
 }
 
+- (void) update:(id<Beats>)beats {
+    uint64_t elapsed = getTimeMicroseconds();
+    beat = [beats getBeat:[beat name]];
+    [self updateUI];
+    elapsed = getTimeMicroseconds() - elapsed;
+    NSLog(@"Update tab took %lld us", elapsed);
+}
 /*
 - (void)toggleRunAtLoad {
     NSPropertyListMutabilityOptions opts = NSPropertyListMutableContainersAndLeaves;

@@ -11,24 +11,21 @@
 #import "common.h"
 
 @implementation BeatTabHandler
-- (id) initWithManager:(id <Beats>) mgr andBundle:(NSBundle*)bundle
+- (id) initWithManager:(id <Beats>) mgr
+                bundle:(NSBundle*)bundle
+                  auth:(id<AuthorizationProvider>) auth
 {
     if (self = [super init]) {
         self->beatsMgr = mgr;
         self->bundle = bundle;
+        self->auth = auth;
     }
     return self;
 }
 
-- (void) updateSelectedTab {
-    uint64_t elapsed = getTimeMicroseconds();
-    if (selectedTab) {
-        BeatTabController *controller = (BeatTabController*) selectedTab;
-        controller.beat = [beatsMgr getBeat:controller.beat.name];
-        [controller updateUI];
-    }
-    elapsed = getTimeMicroseconds() - elapsed;
-    NSLog(@"Update timer took %lld us", elapsed);
+- (void) update
+{
+    [(BeatTabController*)selectedTab update:beatsMgr];
 }
 
 - (BOOL) updateTabs:(NSTabView*)tabView
@@ -44,7 +41,9 @@
         NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
         [item setLabel:beatName];
         BeatTabController *tc = [[BeatTabController alloc]
-                                 initWithBeat:[beatsMgr getBeat:beatName] andBundle:bundle];
+                                 initWithBeat:[beatsMgr getBeat:beatName]
+                                       bundle:bundle
+                                         auth:auth];
         [item setViewController:tc];
         [tabView addTabViewItem:item];
     }
@@ -63,6 +62,7 @@
 
 - (void) tabView:(NSTabView*)tabView willSelectTabViewItem:(NSTabViewItem*)item
 {
+    [(BeatTabController*)[item viewController] update:beatsMgr];
 }
 
 - (void) tabView:(NSTabView*)tabView didSelectTabViewItem:(NSTabViewItem*)item

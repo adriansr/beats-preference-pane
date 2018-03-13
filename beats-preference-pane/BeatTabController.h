@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "beats/Beats.h"
+#import "Authorization.h"
 
 @interface BeatTabController : NSViewController
 {
@@ -18,12 +19,14 @@
     IBOutlet NSTextField *logsField;
     IBOutlet NSButton *startStopButton;
     IBOutlet NSButton *bootButton;
+    
+    id<Beat> beat;
+    id<AuthorizationProvider> auth;
 }
-@property (atomic) id<Beat> beat;
 
-- (id)initWithBeat:(id<Beat>)_ andBundle:(NSBundle*)_;
-//- (void)toggleRunAtLoad;
-- (IBAction)buttonTapped:(id)sender;
+- (id)initWithBeat:(id<Beat>)_ bundle:(NSBundle*)_ auth:(id<AuthorizationProvider>)_;
+- (IBAction)startStopTapped:(id)sender;
 - (void)updateUI;
+- (void)update:(id<Beats>)_;
 
 @end

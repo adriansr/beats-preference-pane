@@ -10,8 +10,9 @@
 #import <SecurityInterface/SFAuthorizationView.h>
 
 #import "BeatTabHandler.h"
+#import "Authorization.h"
 
-@interface BeatsPrefPane : NSPreferencePane {
+@interface BeatsPrefPane : NSPreferencePane <AuthorizationProvider> {
     IBOutlet NSTabView *beatsTab;
     IBOutlet BeatTabHandler *tabHandler;
     IBOutlet SFAuthorizationView *authView;
@@ -24,4 +25,5 @@
 - (void)didSelect;
 - (void)willSelect;
 - (void)didUnselect;
+- (BOOL)isUnlocked;
 @end
