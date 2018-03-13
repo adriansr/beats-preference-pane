@@ -9,6 +9,7 @@
 #import "BeatsPrefPane.h"
 #import "beats/BeatsMock.h"
 #import "beats/BeatsService.h"
+#import "globals.h"
 
 static NSString *beatsPrefix = @"co.elastic.beats";
 static const double UPDATE_INTERVAL_SECS = 2.0;
@@ -22,6 +23,7 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
             bundle:[self bundle]
               auth:self];
         updateTimer = nil;
+        prefPaneBundle = bundle;
     }
 
     return self;
@@ -84,7 +86,7 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
                                        &pipe);
     if (res != errAuthorizationSuccess) {
         NSString *errMsg = (__bridge NSString*)SecCopyErrorMessageString(res, NULL);
-        NSLog(@"Error: AuthorizationExecuteWithPrivileges(`$@ $@`) failed with error code %@: %@",
+        NSLog(@"Error: AuthorizationExecuteWithPrivileges(`%@ %@`) failed with error code %d: %@",
               program, [args componentsJoinedByString:@" "], res, errMsg);
         return res;
     }

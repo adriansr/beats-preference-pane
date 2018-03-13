@@ -8,6 +8,7 @@
 
 #import "BeatsService.h"
 #import "common.h"
+#import "globals.h"
 
 static NSString *launchDaemonsPath = @"/Library/LaunchDaemons";
 static NSString *plistExtension = @"plist";
@@ -79,10 +80,15 @@ static NSString *empty = @"";
 }
 
 BOOL runLaunchctlChain(id<AuthorizationProvider> auth, NSArray *argList) {
+    static NSString *helperPath = nil;
+    if (helperPath == nil) {
+        helperPath = [prefPaneBundle pathForAuxiliaryExecutable:@"launchctl-helper"];
+        NSLog(@"Using helper: `%@`", helperPath);
+    }
     BOOL __block failed = YES;
     [argList enumerateObjectsUsingBlock:^(id obj, NSUInteger _, BOOL *stop) {
         NSArray *args = (NSArray*)obj;
-        int res = [auth runAsRoot:launchctlPath args:args];
+        int res = [auth runAsRoot:helperPath args:args];
         if (res != 0) {
             NSLog(@"Error: command `%@ %@` failed with code %d",
                   launchctlPath, [args componentsJoinedByString:@" "], res);
@@ -96,16 +102,14 @@ BOOL runLaunchctlChain(id<AuthorizationProvider> auth, NSArray *argList) {
     return runLaunchctlChain(auth,@[
         @[ @"enable", [self serviceNameWithDomain]],
         // this still doesn't work, needs the process to be setuid(0)
-        @[ @"asuser", @"root", launchctlPath, @"start", [self serviceName]],
-        @[ @"print", [self serviceNameWithDomain]]
+        @[ @"start", [self serviceName]]
     ]);
 }
 
 - (BOOL)stopWithAuth:(id<AuthorizationProvider>)auth {
     return runLaunchctlChain(auth,@[
         @[ @"disable", [self serviceNameWithDomain]],
-        @[ @"asuser", @"0", launchctlPath, @"stop", [self serviceName]],
-        @[ @"print", [self serviceNameWithDomain]]
+        @[ @"stop", [self serviceName]]
     ]);
 }
 

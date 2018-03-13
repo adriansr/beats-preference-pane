@@ -16,6 +16,10 @@
 		3A6F9ABD202C939D0046F40E /* BeatsPrefPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6F9ABB202C939D0046F40E /* BeatsPrefPane.xib */; };
 		3AA415CE2051B206008915AA /* BeatsService.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA415CC2051B206008915AA /* BeatsService.h */; };
 		3AA415CF2051B206008915AA /* BeatsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415CD2051B206008915AA /* BeatsService.m */; };
+		3AA415DD20582B34008915AA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415DC20582B34008915AA /* main.c */; };
+		3AA415E4205833A3008915AA /* launchctl-helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AA415DA20582B34008915AA /* launchctl-helper */; };
+		3AA415E7205838C7008915AA /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA415E5205838C7008915AA /* globals.h */; };
+		3AA415E8205838C7008915AA /* globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415E6205838C7008915AA /* globals.m */; };
 		3AD0D414203CE40800338653 /* BeatTabController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AD0D411203CE40800338653 /* BeatTabController.h */; };
 		3AD0D415203CE40800338653 /* BeatTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD0D412203CE40800338653 /* BeatTabController.m */; };
 		3AD0D419203CECDA00338653 /* BeatTabHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AD0D417203CECDA00338653 /* BeatTabHandler.h */; };
@@ -24,6 +28,28 @@
 		3AD0D41E203CEDD000338653 /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD0D41C203CEDD000338653 /* common.m */; };
 		3AD0D420203D791100338653 /* BeatTabController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD0D41F203D791100338653 /* BeatTabController.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3AA415D820582B34008915AA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AA415E32058339A008915AA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				3AA415E4205833A3008915AA /* launchctl-helper in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A34B24C203B1F480079E62C /* Beats.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Beats.h; sourceTree = "<group>"; };
@@ -38,6 +64,10 @@
 		3AA415CC2051B206008915AA /* BeatsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsService.h; sourceTree = "<group>"; };
 		3AA415CD2051B206008915AA /* BeatsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsService.m; sourceTree = "<group>"; };
 		3AA415D520572B5A008915AA /* Authorization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Authorization.h; sourceTree = "<group>"; };
+		3AA415DA20582B34008915AA /* launchctl-helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "launchctl-helper"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AA415DC20582B34008915AA /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		3AA415E5205838C7008915AA /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
+		3AA415E6205838C7008915AA /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
 		3AD0D411203CE40800338653 /* BeatTabController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatTabController.h; sourceTree = "<group>"; };
 		3AD0D412203CE40800338653 /* BeatTabController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatTabController.m; sourceTree = "<group>"; };
 		3AD0D417203CECDA00338653 /* BeatTabHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatTabHandler.h; sourceTree = "<group>"; };
@@ -55,6 +85,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3AA415D720582B34008915AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				3A6F9AB4202C939D0046F40E /* beats-preference-pane */,
+				3AA415DB20582B34008915AA /* launchctl-helper */,
 				3A6F9AB3202C939D0046F40E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */,
+				3AA415DA20582B34008915AA /* launchctl-helper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,6 +129,8 @@
 				3AD0D417203CECDA00338653 /* BeatTabHandler.h */,
 				3AD0D418203CECDA00338653 /* BeatTabHandler.m */,
 				3AA415D520572B5A008915AA /* Authorization.h */,
+				3AA415E5205838C7008915AA /* globals.h */,
+				3AA415E6205838C7008915AA /* globals.m */,
 			);
 			path = "beats-preference-pane";
 			sourceTree = "<group>";
@@ -116,6 +157,14 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		3AA415DB20582B34008915AA /* launchctl-helper */ = {
+			isa = PBXGroup;
+			children = (
+				3AA415DC20582B34008915AA /* main.c */,
+			);
+			path = "launchctl-helper";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -126,6 +175,7 @@
 				3AD0D414203CE40800338653 /* BeatTabController.h in Headers */,
 				3AD0D41D203CEDD000338653 /* common.h in Headers */,
 				3A34B24E203B1F480079E62C /* Beats.h in Headers */,
+				3AA415E7205838C7008915AA /* globals.h in Headers */,
 				3AA415CE2051B206008915AA /* BeatsService.h in Headers */,
 				3A34B254203B26D90079E62C /* BeatsMock.h in Headers */,
 				3A6F9AB6202C939D0046F40E /* BeatsPrefPane.h in Headers */,
@@ -144,6 +194,7 @@
 				3A6F9AAE202C939D0046F40E /* Frameworks */,
 				3A6F9AAF202C939D0046F40E /* Headers */,
 				3A6F9AB0202C939D0046F40E /* Resources */,
+				3AA415E32058339A008915AA /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -153,6 +204,23 @@
 			productName = "beats-preference-pane";
 			productReference = 3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */;
 			productType = "com.apple.product-type.bundle";
+		};
+		3AA415D920582B34008915AA /* launchctl-helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AA415DE20582B34008915AA /* Build configuration list for PBXNativeTarget "launchctl-helper" */;
+			buildPhases = (
+				3AA415D620582B34008915AA /* Sources */,
+				3AA415D720582B34008915AA /* Frameworks */,
+				3AA415D820582B34008915AA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "launchctl-helper";
+			productName = "launchctl-helper";
+			productReference = 3AA415DA20582B34008915AA /* launchctl-helper */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -164,6 +232,10 @@
 				ORGANIZATIONNAME = Elastic;
 				TargetAttributes = {
 					3A6F9AB1202C939D0046F40E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					3AA415D920582B34008915AA = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -183,6 +255,7 @@
 			projectRoot = "";
 			targets = (
 				3A6F9AB1202C939D0046F40E /* beats-preference-pane */,
+				3AA415D920582B34008915AA /* launchctl-helper */,
 			);
 		};
 /* End PBXProject section */
@@ -211,6 +284,15 @@
 				3AA415CF2051B206008915AA /* BeatsService.m in Sources */,
 				3AD0D415203CE40800338653 /* BeatTabController.m in Sources */,
 				3A34B255203B26D90079E62C /* BeatsMock.m in Sources */,
+				3AA415E8205838C7008915AA /* globals.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AA415D620582B34008915AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AA415DD20582B34008915AA /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +441,30 @@
 			};
 			name = Release;
 		};
+		3AA415DF20582B34008915AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UZ3M9EEN74;
+				INSTALL_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		3AA415E020582B34008915AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UZ3M9EEN74;
+				INSTALL_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -376,6 +482,15 @@
 			buildConfigurations = (
 				3A6F9AC2202C939D0046F40E /* Debug */,
 				3A6F9AC3202C939D0046F40E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AA415DE20582B34008915AA /* Build configuration list for PBXNativeTarget "launchctl-helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AA415DF20582B34008915AA /* Debug */,
+				3AA415E020582B34008915AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
