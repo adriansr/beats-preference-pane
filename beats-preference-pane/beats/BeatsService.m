@@ -82,7 +82,7 @@ static NSString *empty = @"";
 BOOL runLaunchctlChain(id<AuthorizationProvider> auth, NSArray *argList) {
     static NSString *helperPath = nil;
     if (helperPath == nil) {
-        helperPath = [prefPaneBundle pathForAuxiliaryExecutable:@"launchctl-helper"];
+        helperPath = [prefPaneBundle pathForAuxiliaryExecutable:@"helper"];
         NSLog(@"Using helper: `%@`", helperPath);
     }
     BOOL __block failed = YES;
