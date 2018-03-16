@@ -56,7 +56,7 @@
 		3A34B250203B239F0079E62C /* Beats.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Beats.icns; sourceTree = "<group>"; };
 		3A34B252203B26D80079E62C /* BeatsMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsMock.h; sourceTree = "<group>"; };
 		3A34B253203B26D80079E62C /* BeatsMock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsMock.m; sourceTree = "<group>"; };
-		3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "beats-preference-pane.prefPane"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A6F9AB2202C939D0046F40E /* Beats.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Beats.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6F9AB5202C939D0046F40E /* BeatsPrefPane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsPrefPane.h; sourceTree = "<group>"; };
 		3A6F9AB7202C939D0046F40E /* BeatsPrefPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsPrefPane.m; sourceTree = "<group>"; };
 		3A6F9ABC202C939D0046F40E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BeatsPrefPane.xib; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		3A6F9AB3202C939D0046F40E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */,
+				3A6F9AB2202C939D0046F40E /* Beats.prefPane */,
 				3AA415DA20582B34008915AA /* launchctl-helper */,
 			);
 			name = Products;
@@ -186,9 +186,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3A6F9AB1202C939D0046F40E /* beats-preference-pane */ = {
+		3A6F9AB1202C939D0046F40E /* Beats */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A6F9AC1202C939D0046F40E /* Build configuration list for PBXNativeTarget "beats-preference-pane" */;
+			buildConfigurationList = 3A6F9AC1202C939D0046F40E /* Build configuration list for PBXNativeTarget "Beats" */;
 			buildPhases = (
 				3A6F9AAD202C939D0046F40E /* Sources */,
 				3A6F9AAE202C939D0046F40E /* Frameworks */,
@@ -200,9 +200,9 @@
 			);
 			dependencies = (
 			);
-			name = "beats-preference-pane";
+			name = Beats;
 			productName = "beats-preference-pane";
-			productReference = 3A6F9AB2202C939D0046F40E /* beats-preference-pane.prefPane */;
+			productReference = 3A6F9AB2202C939D0046F40E /* Beats.prefPane */;
 			productType = "com.apple.product-type.bundle";
 		};
 		3AA415D920582B34008915AA /* launchctl-helper */ = {
@@ -254,7 +254,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3A6F9AB1202C939D0046F40E /* beats-preference-pane */,
+				3A6F9AB1202C939D0046F40E /* Beats */,
 				3AA415D920582B34008915AA /* launchctl-helper */,
 			);
 		};
@@ -477,7 +477,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A6F9AC1202C939D0046F40E /* Build configuration list for PBXNativeTarget "beats-preference-pane" */ = {
+		3A6F9AC1202C939D0046F40E /* Build configuration list for PBXNativeTarget "Beats" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3A6F9AC2202C939D0046F40E /* Debug */,
