@@ -26,6 +26,7 @@
 
 - (id)initWithBeat:(id<Beat>)_ bundle:(NSBundle*)_ auth:(id<AuthorizationProvider>)_;
 - (IBAction)startStopTapped:(id)sender;
+- (IBAction)startAtBootTapped:(id)sender;
 - (void)updateUI;
 - (void)update:(id<Beats>)_;
 

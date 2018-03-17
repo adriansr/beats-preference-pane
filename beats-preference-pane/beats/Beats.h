@@ -14,10 +14,12 @@
 - (bool) isBoot;
 - (int) pid;
 - (NSString*) name;
+- (NSString*) plistPath;
 - (NSString*) configFile;
 - (NSString*) logsPath;
 - (BOOL) startWithAuth:(id<AuthorizationProvider>)auth;
 - (BOOL) stopWithAuth:(id<AuthorizationProvider>)auth;
+- (BOOL) toggleRunAtBootWithAuth:(id<AuthorizationProvider>)auth;
 - (BOOL) uninstall;
 @end
 

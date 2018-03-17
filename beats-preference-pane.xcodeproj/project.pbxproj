@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0F656C205D5AE9009DBAE7 /* setboot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0F656B205D5AE9009DBAE7 /* setboot.m */; };
 		3A34B24E203B1F480079E62C /* Beats.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34B24C203B1F480079E62C /* Beats.h */; };
 		3A34B251203B239F0079E62C /* Beats.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3A34B250203B239F0079E62C /* Beats.icns */; };
 		3A34B254203B26D90079E62C /* BeatsMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34B252203B26D80079E62C /* BeatsMock.h */; };
@@ -16,7 +17,7 @@
 		3A6F9ABD202C939D0046F40E /* BeatsPrefPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6F9ABB202C939D0046F40E /* BeatsPrefPane.xib */; };
 		3AA415CE2051B206008915AA /* BeatsService.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA415CC2051B206008915AA /* BeatsService.h */; };
 		3AA415CF2051B206008915AA /* BeatsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415CD2051B206008915AA /* BeatsService.m */; };
-		3AA415DD20582B34008915AA /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415DC20582B34008915AA /* main.c */; };
+		3AA415DD20582B34008915AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415DC20582B34008915AA /* main.m */; };
 		3AA415E4205833A3008915AA /* helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AA415DA20582B34008915AA /* helper */; };
 		3AA415E7205838C7008915AA /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA415E5205838C7008915AA /* globals.h */; };
 		3AA415E8205838C7008915AA /* globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415E6205838C7008915AA /* globals.m */; };
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A0F656B205D5AE9009DBAE7 /* setboot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = setboot.m; sourceTree = "<group>"; };
 		3A34B24C203B1F480079E62C /* Beats.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Beats.h; sourceTree = "<group>"; };
 		3A34B250203B239F0079E62C /* Beats.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Beats.icns; sourceTree = "<group>"; };
 		3A34B252203B26D80079E62C /* BeatsMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsMock.h; sourceTree = "<group>"; };
@@ -75,7 +77,7 @@
 		3AA415CD2051B206008915AA /* BeatsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsService.m; sourceTree = "<group>"; };
 		3AA415D520572B5A008915AA /* Authorization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Authorization.h; sourceTree = "<group>"; };
 		3AA415DA20582B34008915AA /* helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = helper; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AA415DC20582B34008915AA /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		3AA415DC20582B34008915AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3AA415E5205838C7008915AA /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		3AA415E6205838C7008915AA /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
 		3AD0D411203CE40800338653 /* BeatTabController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatTabController.h; sourceTree = "<group>"; };
@@ -170,7 +172,8 @@
 		3AA415DB20582B34008915AA /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				3AA415DC20582B34008915AA /* main.c */,
+				3AA415DC20582B34008915AA /* main.m */,
+				3A0F656B205D5AE9009DBAE7 /* setboot.m */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -303,7 +306,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AA415DD20582B34008915AA /* main.c in Sources */,
+				3A0F656C205D5AE9009DBAE7 /* setboot.m in Sources */,
+				3AA415DD20582B34008915AA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

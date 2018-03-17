@@ -60,7 +60,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="buttonTapped:" target="-2" id="Hf9-Do-sX0"/>
+                        <action selector="startAtBootTapped:" target="-2" id="bfi-QP-4Ns"/>
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgf-md-dqZ">

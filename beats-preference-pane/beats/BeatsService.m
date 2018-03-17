@@ -15,6 +15,16 @@ static NSString *plistExtension = @"plist";
 static NSString *launchctlPath = @"/bin/launchctl";
 static NSString *empty = @"";
 
+static NSString *helperPath = nil;
+
+NSString *getHelperPath() {
+    if (helperPath == nil) {
+        helperPath = [prefPaneBundle pathForAuxiliaryExecutable:@"helper"];
+        NSLog(@"Using helper: `%@`", helperPath);
+    }
+    return helperPath;
+}
+
 @interface ConcreteBeat : NSObject <Beat> {
     @public NSString *config;
     @public NSString *logs;
@@ -22,6 +32,7 @@ static NSString *empty = @"";
     @public bool running;
     @public bool startAtBoot;
     @public pid_t pid;
+    @public NSString *plistPath;
     NSString *prefix;
 }
 - (id) initWithPrefix:(NSString*)prefix andName:(NSString*)name;
@@ -79,16 +90,11 @@ static NSString *empty = @"";
     return [NSString stringWithFormat:@"system/%@", [self serviceName]];
 }
 
-BOOL runLaunchctlChain(id<AuthorizationProvider> auth, NSArray *argList) {
-    static NSString *helperPath = nil;
-    if (helperPath == nil) {
-        helperPath = [prefPaneBundle pathForAuxiliaryExecutable:@"helper"];
-        NSLog(@"Using helper: `%@`", helperPath);
-    }
+BOOL runTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
     BOOL __block failed = YES;
     [argList enumerateObjectsUsingBlock:^(id obj, NSUInteger _, BOOL *stop) {
         NSArray *args = (NSArray*)obj;
-        int res = [auth runAsRoot:helperPath args:args];
+        int res = [auth runAsRoot:args[0] args:args[1]];
         if (res != 0) {
             NSLog(@"Error: command `%@ %@` failed with code %d",
                   launchctlPath, [args componentsJoinedByString:@" "], res);
@@ -99,19 +105,30 @@ BOOL runLaunchctlChain(id<AuthorizationProvider> auth, NSArray *argList) {
 }
 
 - (BOOL)startWithAuth:(id<AuthorizationProvider>)auth {
-    return runLaunchctlChain(auth,@[
-        @[ @"enable", [self serviceNameWithDomain]],
-        // this still doesn't work, needs the process to be setuid(0)
-        @[ @"start", [self serviceName]]
+    return runTaskList(auth,@[
+        @[ getHelperPath(), @[ @"run", launchctlPath, @"enable", [self serviceNameWithDomain] ] ],
+        @[ getHelperPath(), @[ @"run", launchctlPath, @"start", [self serviceName] ] ]
     ]);
 }
 
 - (BOOL)stopWithAuth:(id<AuthorizationProvider>)auth {
-    return runLaunchctlChain(auth,@[
-        @[ @"disable", [self serviceNameWithDomain]],
-        @[ @"stop", [self serviceName]]
+    return runTaskList(auth,@[
+        @[ getHelperPath(), @[ @"run", launchctlPath, @"disable", [self serviceNameWithDomain] ] ],
+        @[ getHelperPath(), @[ @"run", launchctlPath, @"stop", [self serviceName] ] ]
     ]);
 }
+
+- (BOOL)toggleRunAtBootWithAuth:(id<AuthorizationProvider>)auth {
+    return runTaskList(auth,@[
+         @[ getHelperPath(), @[ @"setboot", [self plistPath], self->startAtBoot? @"no" : @"yes"] ]
+    ]);
+}
+
+- (NSString *)plistPath {
+    return self->plistPath;
+}
+
+
 
 
 @end
@@ -209,6 +226,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
         return nil;
     }
     ConcreteBeat *beat = [[ConcreteBeat alloc] initWithPrefix:prefix andName:name];
+    beat->plistPath = dict[@"path"];
     if (dict[@"pid"]) {
         beat->pid = [ (NSString*)dict[@"pid"] intValue];
     }
@@ -252,7 +270,6 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     for (unsigned long i = 0, count = [args count]; i < count; i++) {
         NSString *arg = [args objectAtIndex:i];
         if (key != nil) {
-            //NSLog(@"Found argument '%@' = '%@'", key, arg);
             argsDict[key] = arg;
             key = nil;
         } else if ([arg characterAtIndex:0] == '-') {
