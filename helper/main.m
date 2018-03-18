@@ -37,7 +37,7 @@ int main(int argc, const char * argv[]) {
         for (int i=3; i<argc; i++) {
             fprintf(stderr, " `%s`", argv[i]);
         }
-        execvp(argv[2], &argv[2]);
+        execvp(argv[2], (char* const*)&argv[2]);
         perror("execvp");
         return 3;
     }
