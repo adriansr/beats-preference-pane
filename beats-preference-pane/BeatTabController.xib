@@ -107,7 +107,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="buttonTapped:" target="-2" id="fYY-zm-VlV"/>
+                        <action selector="editConfigTapped:" target="-2" id="S66-lr-DaJ"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wjS-qN-bak">

@@ -7,6 +7,7 @@
 //
 
 #import "BeatTabController.h"
+#import "EditorWindow.h"
 #include "common.h"
 
 @interface BeatTabController ()
@@ -84,6 +85,14 @@ NSString *strOrNil(NSString *str) {
 
 - (IBAction)startAtBootTapped:(id)sender {
     [beat toggleRunAtBootWithAuth:auth];
+}
+
+- (IBAction)editConfigTapped:(id)sender {
+    id<Beat> beat = self->beat;
+    EditorWindow *editor = [[EditorWindow alloc] initWithBeat:[beat name] config:[beat configFile]];
+    NSWindow *window = [editor window];
+    // TODO: on close window
+    [NSApp runModalForWindow: window];
 }
 
 - (void) update:(id<Beats>)beats {
