@@ -102,28 +102,29 @@ NSString *strOrNil(NSString *str) {
     NSString *conf = [beat configFile];
     NSString *tmpFile = [NSString stringWithFormat:@"%@/beatconf-%@.yml",NSTemporaryDirectory(), [[NSUUID UUID] UUIDString]];
     [@"" writeToFile:tmpFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
-    [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat %@ > %@", conf, tmpFile]]];
+    [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", conf, tmpFile]]];
     NSLog(@"Copied `%@` to `%@`", conf, tmpFile);
     EditorWindow *editor = [[EditorWindow alloc] initWithBeat:[beat name] config:tmpFile];
     NSWindow *window = [editor window];
+    [window setFrameOrigin:[[[self view] window] frame].origin];
     NSModalResponse resp = [NSApp runModalForWindow: window];
     NSLog(@"dialog response %d", (int)resp);
     if (resp == NSModalResponseOK) {
-        // auth token may have expired while the configuration was being edited
-        while (![auth isUnlocked] && ![auth forceUnlock]) {
+        while ([auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", tmpFile, conf]]] != errAuthorizationSuccess) {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"Retry"];
             [alert addButtonWithTitle:@"Cancel"];
             [alert setMessageText:@"Retry authentication?"];
-            [alert setInformativeText:@"Authentication expired. Configuration changes will be lost"];
+            [alert setInformativeText:@"Authentication expired. Configuration changes will be lost unless valid credentials are provided."];
             [alert setAlertStyle:NSAlertStyleWarning];
             if ([alert runModal] != NSAlertFirstButtonReturn) {
-                return;
+                NSLog(@"Alert end");
+                break;
             }
+            [auth forceUnlock];
         }
-        [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat %@ > %@", tmpFile, conf]]];
     }
-    
+    [[NSFileManager defaultManager] removeItemAtPath:tmpFile error:nil];
 }
 
 - (void) update:(id<Beats>)beats {
