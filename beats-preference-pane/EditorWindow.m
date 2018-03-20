@@ -27,13 +27,13 @@
     verticalStackView.translatesAutoresizingMaskIntoConstraints = YES;
     [[self window] setTitle:[NSString stringWithFormat:@"%@ configuration", beatName]];
     NSError *err = nil;
-    NSString *contents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&err];
-    if (contents == nil || err != nil) {
-        contents = [err localizedDescription];
+    sourceText = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&err];
+    if (sourceText == nil) {
+        sourceText = [err localizedDescription];
     }
     NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
     [storage setFont:[NSFont userFixedPitchFontOfSize:-1]];
-    [[storage mutableString] setString:contents];
+    [[storage mutableString] setString:sourceText];
 }
 
 - (IBAction)saveAndCloseTapped:(id)sender
@@ -51,6 +51,18 @@
 
 - (IBAction)closeTapped:(id)sender
 {
+    NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
+    if (![[storage string] isEqualToString:sourceText]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Discard"];
+        [alert addButtonWithTitle:@"Continue editing"];
+        [alert setMessageText:@"Discard changes?"];
+        [alert setInformativeText:@"Changes will be lost if the dialog is closed without saving."];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        if ([alert runModal] != NSAlertFirstButtonReturn) {
+            return;
+        }
+    }
     [NSApp stopModalWithCode:NSModalResponseStop];
     [self close];
 }

@@ -13,6 +13,7 @@
              *beatName;
     IBOutlet NSView *verticalStackView;
     IBOutlet NSScrollView *textEditor;
+    NSString *sourceText;
 }
 
 - (id) initWithBeat:(NSString*) name config:(NSString*) path;
