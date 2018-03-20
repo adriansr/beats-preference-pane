@@ -18,12 +18,10 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
 - (id)initWithBundle:(NSBundle *)bundle
 {
     if ( ( self = [super initWithBundle:bundle] ) != nil ) {
-        tabHandler = [[BeatTabHandler alloc]
-            initWithManager:[[BeatsService alloc] initWithPrefix:beatsPrefix]
-            bundle:[self bundle]
-              auth:self];
-        updateTimer = nil;
         prefPaneBundle = bundle;
+        beatsInterface = [[BeatsService alloc] initWithPrefix:beatsPrefix];
+        tabHandler = [[BeatTabHandler alloc] init];
+        updateTimer = nil;
     }
 
     return self;

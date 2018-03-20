@@ -10,3 +10,4 @@
 
 NSBundle *prefPaneBundle;
 id<AuthorizationProvider> authManager;
+id<Beats> beatsInterface;

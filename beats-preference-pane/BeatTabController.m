@@ -8,7 +8,8 @@
 
 #import "BeatTabController.h"
 #import "EditorWindow.h"
-#include "common.h"
+#import "common.h"
+#import "globals.h"
 
 @interface BeatTabController ()
 
@@ -20,12 +21,9 @@ NSString *plistPath = @"/tmp/plist";
 @implementation BeatTabController
 
 - (id) initWithBeat:(id<Beat>)beat
-             bundle:(NSBundle*)bundle
-               auth:(id<AuthorizationProvider>)auth
 {
-    if (self = [self initWithNibName:nil bundle:bundle]) {
+    if (self = [self initWithNibName:nil bundle:prefPaneBundle]) {
         self->beat = beat;
-        self->auth = auth;
     }
     return self;
 }
@@ -64,7 +62,7 @@ NSString *strOrNil(NSString *str) {
     [configField setStringValue:strOrNil([beat configFile])];
     [logsField setStringValue:strOrNil([beat logsPath])];
     
-    BOOL unlocked = [auth isUnlocked];
+    BOOL unlocked = [authManager isUnlocked];
     
     [startStopButton setEnabled:unlocked];
     [bootButton setEnabled:unlocked];
@@ -72,37 +70,39 @@ NSString *strOrNil(NSString *str) {
 }
 
 - (IBAction)startStopTapped:(id)sender {
-    if (![auth isUnlocked]) {
+    if (![authManager isUnlocked]) {
         return;
     }
     uint64_t took = getTimeMicroseconds();
     id<Beat> beat = self->beat;
     
     if ([beat isRunning]) {
-        [beat stopWithAuth:auth];
+        [beat stopWithAuth:authManager];
     } else {
-        [beat startWithAuth:auth];
+        [beat startWithAuth:authManager];
     }
     took = getTimeMicroseconds() - took;
     NSLog(@"start/stop took %lld us", took);
+    [self update];
 }
 
 - (IBAction)startAtBootTapped:(id)sender {
-    if (![auth isUnlocked]) {
+    if (![authManager isUnlocked]) {
         return;
     }
-    [beat toggleRunAtBootWithAuth:auth];
+    [beat toggleRunAtBootWithAuth:authManager];
+    [self update];
 }
 
 - (IBAction)editConfigTapped:(id)sender {
-    if (![auth isUnlocked]) {
+    if (![authManager isUnlocked]) {
         return;
     }
     id<Beat> beat = self->beat;
     NSString *conf = [beat configFile];
     NSString *tmpFile = [NSString stringWithFormat:@"%@/beatconf-%@.yml",NSTemporaryDirectory(), [[NSUUID UUID] UUIDString]];
     [@"" writeToFile:tmpFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
-    [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", conf, tmpFile]]];
+    [authManager runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", conf, tmpFile]]];
     NSLog(@"Copied `%@` to `%@`", conf, tmpFile);
     EditorWindow *editor = [[EditorWindow alloc] initWithBeat:[beat name] config:tmpFile];
     NSWindow *window = [editor window];
@@ -110,7 +110,7 @@ NSString *strOrNil(NSString *str) {
     NSModalResponse resp = [NSApp runModalForWindow: window];
     NSLog(@"dialog response %d", (int)resp);
     if (resp == NSModalResponseOK) {
-        while ([auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", tmpFile, conf]]] != errAuthorizationSuccess) {
+        while ([authManager runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", tmpFile, conf]]] != errAuthorizationSuccess) {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"Retry"];
             [alert addButtonWithTitle:@"Cancel"];
@@ -121,19 +121,18 @@ NSString *strOrNil(NSString *str) {
                 NSLog(@"Alert end");
                 break;
             }
-            [auth forceUnlock];
+            [authManager forceUnlock];
         }
     }
     [[NSFileManager defaultManager] removeItemAtPath:tmpFile error:nil];
 }
 
-- (void) update:(id<Beats>)beats {
+- (void) update {
     uint64_t elapsed = getTimeMicroseconds();
-    beat = [beats getBeat:[beat name]];
+    beat = [beatsInterface getBeat:[beat name]];
     [self updateUI];
     elapsed = getTimeMicroseconds() - elapsed;
     NSLog(@"Update tab took %lld us", elapsed);
 }
-
 
 @end

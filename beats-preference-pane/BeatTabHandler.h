@@ -13,12 +13,9 @@
 #import "Authorization.h"
 
 @interface BeatTabHandler : NSObject <NSTabViewDelegate> {
-    id <Beats> beatsMgr;
-    NSBundle *bundle;
-    id auth;
     id selectedTab;
 }
-- (id) initWithManager:(id <Beats>)_ bundle:(NSBundle*)_ auth:(id<AuthorizationProvider>)_;
+- (id) init;
 - (void) update;
 // TODO: get rid of
 - (BOOL) updateTabs:(NSTabView*)_;

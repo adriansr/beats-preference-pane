@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Authorization.h"
+#import "Beats.h"
 
 extern NSBundle *prefPaneBundle;
 extern id<AuthorizationProvider> authManager;
-
+extern id<Beats> beatsInterface;
