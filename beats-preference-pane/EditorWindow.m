@@ -36,6 +36,24 @@
     [[storage mutableString] setString:sourceText];
 }
 
+- (BOOL)onClose
+{
+    NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
+    if (![[storage string] isEqualToString:sourceText]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Discard"];
+        [alert addButtonWithTitle:@"Continue editing"];
+        [alert setMessageText:@"Discard changes?"];
+        [alert setInformativeText:@"Changes will be lost if the dialog is closed without saving."];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        if ([alert runModal] != NSAlertFirstButtonReturn) {
+            return NO;
+        }
+    }
+    [NSApp stopModalWithCode:NSModalResponseStop];
+    return YES;
+}
+
 - (IBAction)saveAndCloseTapped:(id)sender
 {
     NSError *err = nil;
@@ -52,24 +70,14 @@
 - (IBAction)closeTapped:(id)sender
 {
     NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
-    if (![[storage string] isEqualToString:sourceText]) {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"Discard"];
-        [alert addButtonWithTitle:@"Continue editing"];
-        [alert setMessageText:@"Discard changes?"];
-        [alert setInformativeText:@"Changes will be lost if the dialog is closed without saving."];
-        [alert setAlertStyle:NSAlertStyleWarning];
-        if ([alert runModal] != NSAlertFirstButtonReturn) {
-            return;
-        }
+    if ([self onClose]) {
+        [NSApp stopModalWithCode:NSModalResponseStop];
+        [self close];
     }
-    [NSApp stopModalWithCode:NSModalResponseStop];
-    [self close];
 }
 
 - (BOOL)windowShouldClose:(id)sender {
-    [NSApp stopModalWithCode:NSModalResponseStop];
-    return YES;
+    return [self onClose];
 }
 
 @end

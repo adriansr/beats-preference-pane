@@ -22,6 +22,7 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
         beatsInterface = [[BeatsService alloc] initWithPrefix:beatsPrefix];
         tabHandler = [[BeatTabHandler alloc] init];
         updateTimer = nil;
+        authManager = self;
     }
 
     return self;
@@ -45,7 +46,7 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
 
 - (void)didSelect
 {
-    [self updateUI];
+    //[self updateUI];
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL_SECS repeats:YES block:^(NSTimer*_) {
         [authView updateStatus:nil];
         [tabHandler update];
