@@ -19,27 +19,27 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="650" height="604"/>
+            <rect key="contentRect" x="196" y="240" width="759" height="609"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1200" height="1920"/>
-            <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="650" height="609"/>
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="658" height="609"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nY7-aQ-Wtg">
-                        <rect key="frame" x="20" y="20" width="610" height="584"/>
+                        <rect key="frame" x="4" y="4" width="650" height="601"/>
                         <subviews>
                             <scrollView wantsLayer="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUd-UU-vFw">
-                                <rect key="frame" x="0.0" y="40" width="610" height="544"/>
+                                <rect key="frame" x="0.0" y="40" width="650" height="561"/>
                                 <clipView key="contentView" id="quo-nV-vhA">
-                                    <rect key="frame" x="1" y="1" width="593" height="542"/>
+                                    <rect key="frame" x="1" y="1" width="633" height="559"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="sex-gr-oeB">
-                                            <rect key="frame" x="0.0" y="-1" width="593" height="542"/>
+                                            <rect key="frame" x="0.0" y="-1" width="633" height="559"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="593" height="542"/>
-                                            <size key="maxSize" width="593" height="10000000"/>
+                                            <size key="minSize" width="633" height="559"/>
+                                            <size key="maxSize" width="633" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="test test">
                                                     <attributes>
@@ -58,15 +58,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Eol-ST-13M">
-                                    <rect key="frame" x="594" y="1" width="15" height="542"/>
+                                    <rect key="frame" x="634" y="1" width="15" height="559"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fi9-xX-tZ5">
-                                <rect key="frame" x="0.0" y="0.0" width="610" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="650" height="32"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f0p-04-sEp">
-                                        <rect key="frame" x="-2" y="15" width="382" height="17"/>
+                                        <rect key="frame" x="-2" y="15" width="422" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="L6g-0d-uix">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -74,7 +74,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hmx-Y0-bRi">
-                                        <rect key="frame" x="380" y="4" width="120" height="32"/>
+                                        <rect key="frame" x="420" y="4" width="120" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="108" id="mhL-sf-ebb"/>
                                         </constraints>
@@ -87,11 +87,11 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6sn-QY-Az7">
-                                        <rect key="frame" x="496" y="4" width="120" height="32"/>
+                                        <rect key="frame" x="536" y="4" width="120" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="108" id="0al-mF-gFh"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="push" title="Save &amp; Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5DC-LC-Czr">
+                                        <buttonCell key="cell" type="push" title="Save &amp; Close" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5DC-LC-Czr">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -116,7 +116,9 @@
                             </stackView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="width" constant="650" id="GUz-9C-84K"/>
                             <constraint firstItem="Fi9-xX-tZ5" firstAttribute="width" secondItem="nY7-aQ-Wtg" secondAttribute="width" id="cSo-9O-nSf"/>
+                            <constraint firstItem="QUd-UU-vFw" firstAttribute="width" secondItem="nY7-aQ-Wtg" secondAttribute="width" id="eK6-kZ-eYd"/>
                         </constraints>
                         <visibilityPriorities>
                             <integer value="1000"/>
@@ -129,16 +131,17 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="nY7-aQ-Wtg" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="1XB-OP-U7L"/>
-                    <constraint firstItem="nY7-aQ-Wtg" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="5" id="Nb4-dl-HdJ"/>
-                    <constraint firstAttribute="bottom" secondItem="nY7-aQ-Wtg" secondAttribute="bottom" constant="20" symbolic="YES" id="WGt-U5-8sE"/>
+                    <constraint firstItem="nY7-aQ-Wtg" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="4" id="1XB-OP-U7L"/>
+                    <constraint firstItem="nY7-aQ-Wtg" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="4" id="Nb4-dl-HdJ"/>
+                    <constraint firstAttribute="bottom" secondItem="nY7-aQ-Wtg" secondAttribute="bottom" constant="4" id="WGt-U5-8sE"/>
                     <constraint firstItem="nY7-aQ-Wtg" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="XZB-5N-9E1"/>
+                    <constraint firstAttribute="trailing" secondItem="nY7-aQ-Wtg" secondAttribute="trailing" constant="4" id="uVo-Ah-zgr"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="219" y="-60"/>
+            <point key="canvasLocation" x="273.5" y="-60.5"/>
         </window>
     </objects>
 </document>
