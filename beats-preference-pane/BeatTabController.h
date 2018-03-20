@@ -19,6 +19,7 @@
     IBOutlet NSTextField *logsField;
     IBOutlet NSButton *startStopButton;
     IBOutlet NSButton *bootButton;
+    IBOutlet NSButton *editButton;
     
     id<Beat> beat;
     id<AuthorizationProvider> auth;

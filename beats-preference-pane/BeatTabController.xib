@@ -11,6 +11,7 @@
                 <outlet property="bootButton" destination="MjM-JV-S7c" id="75Y-PL-oLn"/>
                 <outlet property="bootLabel" destination="AAN-SQ-TFH" id="sCr-QF-pjb"/>
                 <outlet property="configField" destination="O6N-J7-p3I" id="Z6e-cb-PSL"/>
+                <outlet property="editButton" destination="ItH-wj-0Cw" id="WRI-a4-SSz"/>
                 <outlet property="logsField" destination="jYM-AQ-ln1" id="xyL-By-T16"/>
                 <outlet property="startStopButton" destination="UmY-rv-hlt" id="x2n-XH-W1F"/>
                 <outlet property="statusLabel" destination="P8r-yk-VlO" id="twY-BN-vmW"/>

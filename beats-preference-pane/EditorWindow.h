@@ -18,4 +18,5 @@
 - (id) initWithBeat:(NSString*) name config:(NSString*) path;
 - (IBAction)saveAndCloseTapped:(id)sender;
 - (IBAction)closeTapped:(id)sender;
+- (BOOL)windowShouldClose:(id)sender;
 @end

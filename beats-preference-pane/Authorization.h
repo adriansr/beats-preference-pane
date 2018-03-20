@@ -8,5 +8,6 @@
 
 @protocol AuthorizationProvider
 - (BOOL) isUnlocked;
+- (BOOL) forceUnlock;
 - (int) runAsRoot:(NSString*) program args:(NSArray*)args;
 @end

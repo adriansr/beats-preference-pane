@@ -68,9 +68,13 @@ NSString *strOrNil(NSString *str) {
     
     [startStopButton setEnabled:unlocked];
     [bootButton setEnabled:unlocked];
+    [editButton setEnabled:unlocked];
 }
 
 - (IBAction)startStopTapped:(id)sender {
+    if (![auth isUnlocked]) {
+        return;
+    }
     uint64_t took = getTimeMicroseconds();
     id<Beat> beat = self->beat;
     
@@ -84,15 +88,42 @@ NSString *strOrNil(NSString *str) {
 }
 
 - (IBAction)startAtBootTapped:(id)sender {
+    if (![auth isUnlocked]) {
+        return;
+    }
     [beat toggleRunAtBootWithAuth:auth];
 }
 
 - (IBAction)editConfigTapped:(id)sender {
+    if (![auth isUnlocked]) {
+        return;
+    }
     id<Beat> beat = self->beat;
-    EditorWindow *editor = [[EditorWindow alloc] initWithBeat:[beat name] config:[beat configFile]];
+    NSString *conf = [beat configFile];
+    NSString *tmpFile = [NSString stringWithFormat:@"%@/beatconf-%@.yml",NSTemporaryDirectory(), [[NSUUID UUID] UUIDString]];
+    [@"" writeToFile:tmpFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat %@ > %@", conf, tmpFile]]];
+    NSLog(@"Copied `%@` to `%@`", conf, tmpFile);
+    EditorWindow *editor = [[EditorWindow alloc] initWithBeat:[beat name] config:tmpFile];
     NSWindow *window = [editor window];
-    // TODO: on close window
-    [NSApp runModalForWindow: window];
+    NSModalResponse resp = [NSApp runModalForWindow: window];
+    NSLog(@"dialog response %d", (int)resp);
+    if (resp == NSModalResponseOK) {
+        // auth token may have expired while the configuration was being edited
+        while (![auth isUnlocked] && ![auth forceUnlock]) {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Retry"];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Retry authentication?"];
+            [alert setInformativeText:@"Authentication expired. Configuration changes will be lost"];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            if ([alert runModal] != NSAlertFirstButtonReturn) {
+                return;
+            }
+        }
+        [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat %@ > %@", tmpFile, conf]]];
+    }
+    
 }
 
 - (void) update:(id<Beats>)beats {

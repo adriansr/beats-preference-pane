@@ -101,6 +101,9 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
     return 0;
 }
 
+- (BOOL)forceUnlock {
+    return [authView authorize:nil];
+}
 
 //
 // SFAuthorization delegates

@@ -31,13 +31,20 @@
     if (contents == nil || err != nil) {
         contents = [err localizedDescription];
     }
-    NSTextView *textView = [textEditor documentView];
-    [[[textView textStorage] mutableString] setString:contents];
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
+    [storage setFont:[NSFont userFixedPitchFontOfSize:-1]];
+    [[storage mutableString] setString:contents];
 }
 
 - (IBAction)saveAndCloseTapped:(id)sender
 {
+    NSError *err = nil;
+    NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
+    if (![[storage string] writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&err]) {
+        NSAlert *alert = [NSAlert alertWithError:err];
+        [alert runModal];
+        return;
+    }
     [NSApp stopModalWithCode:NSModalResponseOK];
     [self close];
 }
@@ -46,6 +53,11 @@
 {
     [NSApp stopModalWithCode:NSModalResponseStop];
     [self close];
+}
+
+- (BOOL)windowShouldClose:(id)sender {
+    [NSApp stopModalWithCode:NSModalResponseStop];
+    return YES;
 }
 
 @end
