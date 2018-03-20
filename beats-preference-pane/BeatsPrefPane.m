@@ -46,7 +46,6 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
 
 - (void)didSelect
 {
-    //[self updateUI];
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL_SECS repeats:YES block:^(NSTimer*_) {
         [authView updateStatus:nil];
         [tabHandler update];

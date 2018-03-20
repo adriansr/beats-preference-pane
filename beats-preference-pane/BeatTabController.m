@@ -63,7 +63,6 @@ NSString *strOrNil(NSString *str) {
     [logsField setStringValue:strOrNil([beat logsPath])];
     
     BOOL unlocked = [authManager isUnlocked];
-    
     [startStopButton setEnabled:unlocked];
     [bootButton setEnabled:unlocked];
     [editButton setEnabled:unlocked];
@@ -108,7 +107,6 @@ NSString *strOrNil(NSString *str) {
     NSWindow *window = [editor window];
     [window setFrameOrigin:[[[self view] window] frame].origin];
     NSModalResponse resp = [NSApp runModalForWindow: window];
-    NSLog(@"dialog response %d", (int)resp);
     if (resp == NSModalResponseOK) {
         while ([authManager runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", tmpFile, conf]]] != errAuthorizationSuccess) {
             NSAlert *alert = [[NSAlert alloc] init];
@@ -118,7 +116,6 @@ NSString *strOrNil(NSString *str) {
             [alert setInformativeText:@"Authentication expired. Configuration changes will be lost unless valid credentials are provided."];
             [alert setAlertStyle:NSAlertStyleWarning];
             if ([alert runModal] != NSAlertFirstButtonReturn) {
-                NSLog(@"Alert end");
                 break;
             }
             [authManager forceUnlock];
