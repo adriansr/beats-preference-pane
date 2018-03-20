@@ -13,12 +13,13 @@
 #import "Authorization.h"
 
 @interface BeatTabHandler : NSObject <NSTabViewDelegate> {
+    NSTabView *tabView;
     id selectedTab;
 }
-- (id) init;
+- (id) initWithTabView:(NSTabView*)_;
 - (void) update;
 // TODO: get rid of
-- (BOOL) updateTabs:(NSTabView*)_;
+- (BOOL) updateTabs:(NSArray*)_;
 //- (void) updateSelectedTab:(BOOL) isUnlocked;
 
 // NSTabViewDelegate

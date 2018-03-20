@@ -69,7 +69,6 @@
 
 - (IBAction)closeTapped:(id)sender
 {
-    NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
     if ([self onClose]) {
         [NSApp stopModalWithCode:NSModalResponseStop];
         [self close];

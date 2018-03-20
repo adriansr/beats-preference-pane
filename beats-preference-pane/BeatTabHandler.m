@@ -12,10 +12,12 @@
 #import "globals.h"
 
 @implementation BeatTabHandler
-- (id) init
+- (id) initWithTabView:(NSTabView *)tabView;
 {
     if (self = [super init]) {
         self->selectedTab = nil;
+        self->tabView = tabView;
+        tabView.delegate = self;
     }
     return self;
 }
@@ -25,14 +27,19 @@
     [(BeatTabController*)selectedTab update];
 }
 
-- (BOOL) updateTabs:(NSTabView*)tabView
+- (BOOL) updateTabs:(NSArray*)beats
 {
+    NSViewController *selectedTab = self->selectedTab;
     uint i;
     NSArray *items;
+    NSString *selectedName = nil;
     for (i=0, items = tabView.tabViewItems; items != nil && i < items.count; i++) {
-        [tabView removeTabViewItem:[items objectAtIndex:i]];
+        NSTabViewItem *item = [items objectAtIndex:i];
+        if (selectedTab != nil && item.viewController == selectedTab) {
+            selectedName = item.identifier;
+        }
+        [tabView removeTabViewItem:item];
     }
-    NSArray *beats = [beatsInterface listBeats];
     for (uint i=0; i < beats.count; i++) {
         NSString *beatName = [beats objectAtIndex:i];
         NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
@@ -41,6 +48,10 @@
                                  initWithBeat:[beatsInterface getBeat:beatName]];
         [item setViewController:tc];
         [tabView addTabViewItem:item];
+        if ([beatName isEqualToString:selectedName]) {
+            selectedTab = tc;
+            [tabView selectTabViewItem:item];
+        }
     }
     return beats.count > 0;
 }

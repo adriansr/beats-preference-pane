@@ -20,11 +20,10 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
     if ( ( self = [super initWithBundle:bundle] ) != nil ) {
         prefPaneBundle = bundle;
         beatsInterface = [[BeatsService alloc] initWithPrefix:beatsPrefix];
-        tabHandler = [[BeatTabHandler alloc] init];
         updateTimer = nil;
         authManager = self;
+        knownBeats = [beatsInterface listBeats];
     }
-
     return self;
 }
 
@@ -36,22 +35,43 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
     [authView setAuthorizationRights:&rights];
     authView.delegate = self;
     [authView updateStatus:nil];
-    beatsTab.delegate = tabHandler;
+    tabHandler = [[BeatTabHandler alloc] initWithTabView:beatsTab];
 }
 
 - (void)willSelect
 {
+    NSLog(@"updateUI (willSelect)");
     [self updateUI];
 }
 
 - (void)didSelect
 {
-    updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL_SECS repeats:YES block:^(NSTimer*_) {
-        [authView updateStatus:nil];
-        [tabHandler update];
-    }];
+    updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL_SECS target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
 }
 
+BOOL beatArrayEquals(NSArray *a, NSArray *b)
+{
+    size_t n = a.count;
+    if (b.count != n) return NO;
+    for (size_t i = 0; i < n; i++) {
+        if (![(NSString*)a[i] isEqualToString:b[i]])
+            return NO;
+    }
+    return YES;
+}
+
+- (void)onTimer
+{
+    [authView updateStatus:nil];
+    NSArray *beats = [beatsInterface listBeats];
+    if (!beatArrayEquals(beats, knownBeats)) {
+        NSLog(@"updateUI (onTimer) %@ != %@", beats, knownBeats);
+        knownBeats = beats;
+        [self updateUI];
+    } else {
+        [tabHandler update];
+    }
+}
 - (void)didUnselect
 {
     [updateTimer invalidate];
@@ -59,7 +79,7 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
 }
 
 - (void)updateUI {
-    [messageLabel setHidden:[tabHandler updateTabs:beatsTab]];
+    [messageLabel setHidden:[tabHandler updateTabs:knownBeats]];
 }
 
 - (BOOL)isUnlocked {

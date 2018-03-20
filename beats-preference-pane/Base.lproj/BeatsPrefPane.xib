@@ -20,7 +20,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="120" y="952" width="668" height="368"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="368"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -51,7 +51,7 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tOg-IC-8mc">
                         <rect key="frame" x="18" y="138" width="632" height="91"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="No beats detected." allowsEditingTextAttributes="YES" id="Um2-mR-CDT">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="No beats found." allowsEditingTextAttributes="YES" id="Um2-mR-CDT">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

@@ -18,6 +18,7 @@
     IBOutlet SFAuthorizationView *authView;
     IBOutlet NSTextField *messageLabel;
     NSTimer *updateTimer;
+    NSArray *knownBeats;
 }
 
 - (id)initWithBundle:(NSBundle *)bundle;
