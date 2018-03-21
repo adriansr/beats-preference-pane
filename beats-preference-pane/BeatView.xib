@@ -6,12 +6,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BeatTabController">
+        <customObject id="-2" userLabel="File's Owner" customClass="BeatViewController">
             <connections>
                 <outlet property="bootButton" destination="MjM-JV-S7c" id="75Y-PL-oLn"/>
                 <outlet property="bootLabel" destination="AAN-SQ-TFH" id="sCr-QF-pjb"/>
                 <outlet property="configField" destination="O6N-J7-p3I" id="Z6e-cb-PSL"/>
                 <outlet property="editButton" destination="ItH-wj-0Cw" id="WRI-a4-SSz"/>
+                <outlet property="logsButton" destination="wjS-qN-bak" id="033-Lg-qOx"/>
                 <outlet property="logsField" destination="jYM-AQ-ln1" id="xyL-By-T16"/>
                 <outlet property="startStopButton" destination="UmY-rv-hlt" id="x2n-XH-W1F"/>
                 <outlet property="statusLabel" destination="P8r-yk-VlO" id="twY-BN-vmW"/>
@@ -118,6 +119,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="viewLogsTapped:" target="-2" id="2xJ-ye-Iqo"/>
+                    </connections>
                 </button>
             </subviews>
         </customView>

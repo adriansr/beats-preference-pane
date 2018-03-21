@@ -62,6 +62,12 @@
     [startStopButton setEnabled:unlocked];
     [bootButton setEnabled:unlocked];
     [editButton setEnabled:unlocked];
+    [logsButton setEnabled:unlocked];
+}
+
+- (void) update {
+    beat = [beatsInterface getBeat:[beat name]];
+    [self updateUI];
 }
 
 - (IBAction)startStopTapped:(id)sender {
@@ -130,9 +136,14 @@
     [[NSFileManager defaultManager] removeItemAtPath:tmpFile error:nil];
 }
 
-- (void) update {
-    beat = [beatsInterface getBeat:[beat name]];
-    [self updateUI];
+- (IBAction)viewLogsTapped:(id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:@"Can't display logs"];
+    [alert setInformativeText:@"Due to strict permissions in Beats logs, they are only accessible using the command line as root."];
+    [alert setAlertStyle:NSAlertStyleWarning];
+    [alert runModal];
 }
 
 @end

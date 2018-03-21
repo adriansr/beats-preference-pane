@@ -29,6 +29,7 @@
     IBOutlet NSButton *startStopButton;
     IBOutlet NSButton *bootButton;
     IBOutlet NSButton *editButton;
+    IBOutlet NSButton *logsButton;
 
     // The Beat being displayed by this view
     id<Beat> beat;
@@ -40,6 +41,7 @@
 - (IBAction)startStopTapped:(id)sender;
 - (IBAction)startAtBootTapped:(id)sender;
 - (IBAction)editConfigTapped:(id)sender;
+- (IBAction)viewLogsTapped:(id)sender;
 - (void)update;
 
 @end
