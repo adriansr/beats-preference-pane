@@ -14,20 +14,17 @@
 // limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+// Service prefix used by Beats launch daemons. Used for detection
+#define BEATS_PREFIX @"co.elastic.beats"
 
-/* EditorWindow manages the window to edit configuration files
- */
-@interface EditorWindow : NSWindowController {
-    NSString *filePath,
-             *beatName;
-    IBOutlet NSView *verticalStackView;
-    IBOutlet NSScrollView *textEditor;
-    NSString *sourceText;
-}
+// How often daemons info is updated
+#define UPDATE_INTERVAL_SECS 2.0
 
-- (id) initWithBeat:(NSString*) name config:(NSString*) path;
-- (IBAction)saveAndCloseTapped:(id)sender;
-- (IBAction)closeTapped:(id)sender;
-- (BOOL)windowShouldClose:(id)sender;
-@end
+// Helper binary name
+#define HELPER_BINARY @"helper"
+
+// Path where to look for launch services
+#define LAUNCHDAEMONS_PATH @"/Library/LaunchDaemons"
+
+// Path to launchctl executable
+#define LAUNCHCTL_PATH @"/bin/launchctl"

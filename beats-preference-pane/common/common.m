@@ -10,21 +10,10 @@
 #import <Cocoa/Cocoa.h>
 #import <sys/time.h>
 
-void alert(NSString *fmt, ...) {
-    va_list args;
-    va_start(args, fmt);
-    NSString *msg = [[NSString alloc] initWithFormat:fmt arguments:args];
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:msg];
-    [alert runModal];
-    va_end(args);
-}
-
-void readByLine(NSFileHandle *handle, BOOL (^callback)(NSString*)) {
-    
-    const int readLength = 128;
-    
+static void readLines(NSFileHandle *handle, BOOL (^callback)(NSString*)) {
+    const int readLength = 4096;
     NSMutableData *buffer = [NSMutableData dataWithCapacity:readLength];
+
     unsigned int length = 0;
     for (NSData *readData; (readData = [handle readDataOfLength:readLength])!= nil && [readData length] > 0;) {
         [buffer appendData:readData];
@@ -49,18 +38,18 @@ void readByLine(NSFileHandle *handle, BOOL (^callback)(NSString*)) {
     }
 }
 
-int launchTask(NSString *path, NSArray* args, BOOL (^callback)(NSString*)) {
+int executeAndGetOutput(NSString *path, NSArray* args, BOOL (^callback)(NSString*)) {
     NSPipe *pipe = [NSPipe pipe];
     NSFileHandle *fHandle = pipe.fileHandleForReading;
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = path;
     task.arguments = args;
     task.standardOutput = pipe;
-    
+
     [task launch];
-    
-    readByLine(fHandle, callback);
-    
+
+    readLines(fHandle, callback);
+
     [fHandle closeFile];
     [task waitUntilExit];
     return [task terminationStatus];
@@ -70,4 +59,8 @@ uint64_t getTimeMicroseconds(void) {
     struct timeval tv;
     gettimeofday(&tv, NULL);
     return tv.tv_sec*1000000 + tv.tv_usec;
+}
+
+NSString *strOrNil(NSString *str) {
+    return str != nil? str : @"(nil)";
 }

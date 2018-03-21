@@ -17,12 +17,16 @@
 #import <PreferencePanes/PreferencePanes.h>
 #import <SecurityInterface/SFAuthorizationView.h>
 
-#import "BeatTabHandler.h"
+#import "TabViewDelegate.h"
 #import "Authorization.h"
 
+/* BeatsPrefPane is the main class for handling the preference pane.
+   Implements <AuthorizationProvided> so that it can provide authorization
+   obtained via the SFAuthorizationView to other components.
+ */
 @interface BeatsPrefPane : NSPreferencePane <AuthorizationProvider> {
     IBOutlet NSTabView *beatsTab;
-    IBOutlet BeatTabHandler *tabHandler;
+    IBOutlet TabViewDelegate *tabDelegate;
     IBOutlet SFAuthorizationView *authView;
     IBOutlet NSTextField *messageLabel;
     NSTimer *updateTimer;

@@ -17,9 +17,11 @@
 #import <Foundation/Foundation.h>
 #import "Beats.h"
 
+// BeatsService is the macOS implementation for the Beats protocol
 @interface BeatsService : NSObject <Beats> {
     NSString *prefix;
 }
+
 - (id)initWithPrefix:(NSString*)prefix;
 - (NSArray*) listBeats;
 - (id <Beat>)getBeat:(NSString*)name;

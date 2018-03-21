@@ -14,50 +14,66 @@
 // limitations under the License.
 //
 
+#import "config.h"
 #import "BeatsPrefPane.h"
 #import "beats/BeatsService.h"
 #import "globals.h"
 
-static NSString *beatsPrefix = @"co.elastic.beats";
-static const double UPDATE_INTERVAL_SECS = 2.0;
-
 @implementation BeatsPrefPane
+
+// Constructor
 - (id)initWithBundle:(NSBundle *)bundle
 {
     if ( ( self = [super initWithBundle:bundle] ) != nil ) {
-        beatsInterface = [[BeatsService alloc] initWithPrefix:beatsPrefix];
+        beatsInterface = [[BeatsService alloc] initWithPrefix:BEATS_PREFIX];
         self->updateTimer = nil;
         self->knownBeats = [beatsInterface listBeats];
         self->bundle = bundle;
-        self->helperPath = [bundle pathForAuxiliaryExecutable:@"helper"];
+        self->helperPath = [bundle pathForAuxiliaryExecutable:HELPER_BINARY];
         NSLog(@"Using helper: `%@`", helperPath);
     }
     return self;
 }
 
+// Called when UI file is loaded
 - (void)mainViewDidLoad
 {
-    // Setup security.
+    // Setup SFAuthorizationView
     AuthorizationItem items = {kAuthorizationRightExecute, 0, NULL, 0};
     AuthorizationRights rights = {1, &items};
     [authView setAuthorizationRights:&rights];
     authView.delegate = self;
     [authView updateStatus:nil];
-    tabHandler = [[BeatTabHandler alloc] initWithTabView:beatsTab bundle:bundle];
+    // Allocate tabview delegate
+    tabDelegate = [[TabViewDelegate alloc] initWithTabView:beatsTab bundle:bundle];
 }
 
+// Called before the preference pane is shown
 - (void)willSelect
 {
-    NSLog(@"updateUI (willSelect)");
     [self updateUI];
 }
 
+// Called when the preference pane is shown
 - (void)didSelect
 {
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL_SECS target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
 }
 
-BOOL beatArrayEquals(NSArray *a, NSArray *b)
+// Called when the preference pane is closed
+- (void)didUnselect
+{
+    [updateTimer invalidate];
+    updateTimer = nil;
+}
+
+// Custom code to update the UI elements
+- (void)updateUI {
+    [tabDelegate populateTabs:knownBeats withAuth:self];
+    [messageLabel setHidden:knownBeats.count > 0];
+}
+
+static BOOL beatArrayEquals(NSArray *a, NSArray *b)
 {
     size_t n = a.count;
     if (b.count != n) return NO;
@@ -73,22 +89,30 @@ BOOL beatArrayEquals(NSArray *a, NSArray *b)
     [authView updateStatus:nil];
     NSArray *beats = [beatsInterface listBeats];
     if (!beatArrayEquals(beats, knownBeats)) {
-        NSLog(@"updateUI (onTimer) %@ != %@", beats, knownBeats);
         knownBeats = beats;
         [self updateUI];
     } else {
-        [tabHandler update];
+        [tabDelegate update];
     }
 }
-- (void)didUnselect
-{
-    [updateTimer invalidate];
-    updateTimer = nil;
+
+//
+// SFAuthorization delegates
+//
+
+- (void)authorizationViewDidAuthorize:(SFAuthorizationView *)view {
+    // Update the tab delegate so that it can enable UI elements
+    [tabDelegate update];
 }
 
-- (void)updateUI {
-    [messageLabel setHidden:[tabHandler updateTabs:knownBeats withAuth:self]];
+- (void)authorizationViewDidDeauthorize:(SFAuthorizationView *)view {
+    // Update the tab delegate so that it can disable UI elements
+    [tabDelegate update];
 }
+
+//
+// AuthorizationProvider protocol
+//
 
 - (BOOL)isUnlocked {
     return [authView authorizationState] == SFAuthorizationViewUnlockedState;
@@ -102,8 +126,8 @@ BOOL beatArrayEquals(NSArray *a, NSArray *b)
     }
     cArgs[numArgs] = NULL;
 
-    NSLog(@"Running AuthorizationExecuteWithPrivileges(`%@ %@`) ...", program, [args componentsJoinedByString:@" "]);
-    
+    NSLog(@"Running AuthorizationExecuteWithPrivileges(`%@ %@`)", program, [args componentsJoinedByString:@" "]);
+
     FILE *pipe = NULL;
     int res = AuthorizationExecuteWithPrivileges([[authView authorization] authorizationRef],
                                        [program cStringUsingEncoding:NSUTF8StringEncoding],
@@ -133,19 +157,6 @@ BOOL beatArrayEquals(NSArray *a, NSArray *b)
 
 - (int)runHelperAsRootWithArgs:(NSArray *)args {
     return [self runAsRoot:helperPath args:args];
-}
-
-
-//
-// SFAuthorization delegates
-//
-
-- (void)authorizationViewDidAuthorize:(SFAuthorizationView *)view {
-    [tabHandler update];
-}
-
-- (void)authorizationViewDidDeauthorize:(SFAuthorizationView *)view {
-    [tabHandler update];
 }
 
 @end

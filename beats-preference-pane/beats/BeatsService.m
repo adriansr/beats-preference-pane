@@ -17,10 +17,9 @@
 #import "BeatsService.h"
 #import "../common/common.h"
 #import "globals.h"
+#import "config.h"
 
-static NSString *launchDaemonsPath = @"/Library/LaunchDaemons";
 static NSString *plistExtension = @"plist";
-static NSString *launchctlPath = @"/bin/launchctl";
 static NSString *empty = @"";
 
 @interface ConcreteBeat : NSObject <Beat> {
@@ -47,6 +46,7 @@ static NSString *empty = @"";
         self->running = false;
         self->startAtBoot = false;
         self->pid = 0;
+        self->plistPath = nil;
     }
     return self;
 }
@@ -88,6 +88,7 @@ static NSString *empty = @"";
     return [NSString stringWithFormat:@"system/%@", [self serviceName]];
 }
 
+// Executes a batch of commands using the helper app.
 BOOL runHelperTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
     BOOL __block failed = YES;
     [argList enumerateObjectsUsingBlock:^(id obj, NSUInteger _, BOOL *stop) {
@@ -104,15 +105,15 @@ BOOL runHelperTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
 
 - (BOOL)startWithAuth:(id<AuthorizationProvider>)auth {
     return runHelperTaskList(auth,@[
-        @[ @"run", launchctlPath, @"enable", [self serviceNameWithDomain] ],
-        @[ @"run", launchctlPath, @"start", [self serviceName] ]
+        @[ @"run", LAUNCHCTL_PATH, @"enable", [self serviceNameWithDomain] ],
+        @[ @"run", LAUNCHCTL_PATH, @"start", [self serviceName] ]
     ]);
 }
 
 - (BOOL)stopWithAuth:(id<AuthorizationProvider>)auth {
     return runHelperTaskList(auth,@[
-        @[ @"run", launchctlPath, @"disable", [self serviceNameWithDomain] ],
-        @[ @"run", launchctlPath, @"stop", [self serviceName] ]
+        @[ @"run", LAUNCHCTL_PATH, @"disable", [self serviceNameWithDomain] ],
+        @[ @"run", LAUNCHCTL_PATH, @"stop", [self serviceName] ]
     ]);
 }
 
@@ -125,9 +126,6 @@ BOOL runHelperTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
 - (NSString *)plistPath {
     return self->plistPath;
 }
-
-
-
 
 @end
 
@@ -152,7 +150,7 @@ BOOL runHelperTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
 
 - (NSArray *)doListBeats {
     NSError *error = nil;
-    NSArray* contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:launchDaemonsPath
+    NSArray* contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:LAUNCHDAEMONS_PATH
                                                                             error:&error];
     if (error != nil) {
         NSLog(@"Error: Unable to list installed beats: %@", [error localizedDescription]);
@@ -161,17 +159,17 @@ BOOL runHelperTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
     NSMutableArray *beats = [[NSMutableArray alloc] init];
     NSUInteger prefixLength = [prefix length];
     NSUInteger extensionLength = [plistExtension length];
-    
+
     [contents enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *filename = (NSString *)obj;
-        //NSLog(@"Got daemon '%@'", filename);
         NSUInteger nameLength =[filename length];
+
+        // Make sure the file is <prefix>.something.plist
         if ([filename hasPrefix:self->prefix]
              && nameLength > prefixLength + extensionLength + 2
              && [filename characterAtIndex:prefixLength] == '.'
              && [[[filename pathExtension] lowercaseString] isEqualToString:plistExtension]) {
             NSString *beatName = [filename substringWithRange:NSMakeRange(prefixLength+1, nameLength - prefixLength - extensionLength - 2)];
-            //NSLog(@"Found beat '%@'", beatName);
             [beats addObject:beatName];
         }
     }];
@@ -192,7 +190,7 @@ NSString *parseLine(NSString *line, NSString **data) {
 
 NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:[keys count]];
-    launchTask(launchctlPath, @[@"print", label], ^(NSString *line) {
+    executeAndGetOutput(LAUNCHCTL_PATH, @[@"print", label], ^(NSString *line) {
         NSString *value;
         NSString *key = parseLine(line, &value);
         if (key != nil && [keys containsObject:key]) {
@@ -218,7 +216,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     NSString *label = [NSString stringWithFormat:@"system/%@.%@", self->prefix, name];
     NSSet *wantedKeys = [NSSet setWithObjects:@"pid", @"state", @"path", nil];
     NSDictionary * dict = parseLaunchctlPrint(label, wantedKeys);
-    
+
     if (!dict[@"path"]) {
         NSLog(@"Error: launch daemon %@ not installed", name);
         return nil;
@@ -232,7 +230,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
     if (beat->pid > 0 && [@"running" isEqualToString:dict[@"state"]]) {
         beat->running = true;
     }
-    
+
     // Get configuration paths
     NSError *err;
     NSInputStream *plistFile = [[NSInputStream alloc] initWithFileAtPath:dict[@"path"]];
@@ -245,7 +243,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
         NSLog(@"Error: unable to read plist at path '%@': %@", dict[@"path"], [err localizedDescription]);
         return nil;
     }
-    
+
     NSDictionary *plist = [NSPropertyListSerialization propertyListWithStream:plistFile
                                                                       options:NSPropertyListImmutable
                                                                        format:nil
@@ -259,7 +257,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
         return nil;
     }
     [plistFile close];
-    
+
     NSNumber *runAtLoad = plist[@"RunAtLoad"];
     beat->startAtBoot = runAtLoad != nil && [runAtLoad boolValue] == YES;
     NSArray *args = plist[@"ProgramArguments"];
@@ -274,7 +272,7 @@ NSDictionary* parseLaunchctlPrint(NSString *label, NSSet *keys) {
                 key = arg;
         }
     }
-    
+
     beat->config = argsDict[@"-c"];
     if (beat->config == nil) {
         beat->config = [NSString stringWithFormat:@"/etc/%@/%@.yml", name, name];

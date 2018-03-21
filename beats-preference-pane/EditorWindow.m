@@ -16,10 +16,6 @@
 
 #import "EditorWindow.h"
 
-@interface EditorWindow ()
-
-@end
-
 @implementation EditorWindow
 
 - (id) initWithBeat:(NSString*)name config:(NSString*)path {
@@ -34,14 +30,16 @@
     [super windowDidLoad];
     verticalStackView.translatesAutoresizingMaskIntoConstraints = YES;
     [[self window] setTitle:[NSString stringWithFormat:@"%@ configuration", beatName]];
+
     NSError *err = nil;
     sourceText = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&err];
     if (sourceText == nil) {
         sourceText = [err localizedDescription];
     }
     NSTextStorage *storage = [(NSTextView*)[textEditor documentView] textStorage];
-    [storage setFont:[NSFont userFixedPitchFontOfSize:-1]];
     [[storage mutableString] setString:sourceText];
+    // Yaml needs a monospace font
+    [storage setFont:[NSFont userFixedPitchFontOfSize:-1]];
 }
 
 - (BOOL)onClose

@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-void alert(NSString *fmt, ...);
-int launchTask(NSString *path, NSArray *args, BOOL (^callback)(NSString*));
+// executes the given `path` executable, passing `args` array.
+// Callback is called for every line in the program's output.
+// Returns the program exit status.
+int executeAndGetOutput(NSString *path, NSArray *args, BOOL (^callback)(NSString*));
+
+// Returns the current time in microseconds
 uint64_t getTimeMicroseconds(void);
+
+// Returns the given string, or @"nil" if its nil.
+NSString *strOrNil(NSString *str);

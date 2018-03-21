@@ -20,16 +20,18 @@
 #import "beats/Beats.h"
 #import "Authorization.h"
 
-@interface BeatTabHandler : NSObject <NSTabViewDelegate> {
+@class BeatViewController;
+
+/* TabViewDelegate takes care of the NSTabView that displays all the installed beats
+ */
+@interface TabViewDelegate : NSObject <NSTabViewDelegate> {
     NSTabView *tabView;
     NSBundle *bundle;
-    id selectedTab;
+    BeatViewController *selectedTab;
 }
 - (id) initWithTabView:(NSTabView*)_ bundle:(NSBundle*)_;
 - (void) update;
-// TODO: get rid of
-- (BOOL) updateTabs:(NSArray*)_ withAuth:(id<AuthorizationProvider>)_;
-//- (void) updateSelectedTab:(BOOL) isUnlocked;
+- (void) populateTabs:(NSArray*)_ withAuth:(id<AuthorizationProvider>)_;
 
 // NSTabViewDelegate
 - (void) tabViewDidChangeNumberOfTabViewItems:(NSTabView*)_;

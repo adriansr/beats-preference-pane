@@ -14,12 +14,12 @@
 // limitations under the License.
 //
 
-#import "BeatTabHandler.h"
-#import "BeatTabController.h"
+#import "TabViewDelegate.h"
+#import "BeatViewController.h"
 #import "common/common.h"
 #import "globals.h"
 
-@implementation BeatTabHandler
+@implementation TabViewDelegate
 - (id) initWithTabView:(NSTabView *)tabView
                 bundle:(NSBundle*)bundle
 {
@@ -34,12 +34,14 @@
 
 - (void) update
 {
-    [(BeatTabController*)selectedTab update];
+    [selectedTab update];
 }
 
-- (BOOL) updateTabs:(NSArray*)beats withAuth:(id<AuthorizationProvider>)auth
+- (void) populateTabs:(NSArray*)beats withAuth:(id<AuthorizationProvider>)auth
 {
-    NSViewController *selectedTab = self->selectedTab;
+    // cache self->selectedTab, as it is going to change in this method
+    // (add|remove|select)TabViewItem methods call the NSTabViewDelegate callbacks
+    BeatViewController *selectedTab = self->selectedTab;
     uint i;
     NSArray *items;
     NSString *selectedName = nil;
@@ -54,16 +56,15 @@
         NSString *beatName = [beats objectAtIndex:i];
         NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
         [item setLabel:beatName];
-        BeatTabController *tc = [[BeatTabController alloc]
+        BeatViewController *vc = [[BeatViewController alloc]
                                  initWithBeat:[beatsInterface getBeat:beatName] auth:auth bundle:bundle];
-        [item setViewController:tc];
+        [item setViewController:vc];
         [tabView addTabViewItem:item];
         if ([beatName isEqualToString:selectedName]) {
-            selectedTab = tc;
+            selectedTab = vc;
             [tabView selectTabViewItem:item];
         }
     }
-    return beats.count > 0;
 }
 
 - (void) tabViewDidChangeNumberOfTabViewItems:(NSTabView*) tabView
@@ -78,12 +79,12 @@
 
 - (void) tabView:(NSTabView*)tabView willSelectTabViewItem:(NSTabViewItem*)item
 {
-    [(BeatTabController*)[item viewController] update];
+    [(BeatViewController*)[item viewController] update];
 }
 
 - (void) tabView:(NSTabView*)tabView didSelectTabViewItem:(NSTabViewItem*)item
 {
-    selectedTab = [item viewController];
+    selectedTab = (BeatViewController*)[item viewController];
 }
 
 @end

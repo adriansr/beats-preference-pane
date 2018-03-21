@@ -14,33 +14,22 @@
 // limitations under the License.
 //
 
-#import "BeatTabController.h"
+#import "BeatViewController.h"
 #import "EditorWindow.h"
 #import "common/common.h"
 #import "globals.h"
 
-@interface BeatTabController ()
-
-@end
-
-//NSString *plistPath = @"/Library/LaunchDaemons/co.elastic.beats.packetbeat.plist";
-NSString *plistPath = @"/tmp/plist";
-
-@implementation BeatTabController
+@implementation BeatViewController
 
 - (id) initWithBeat:(id<Beat>)beat
                auth:(id<AuthorizationProvider>)auth
              bundle:(NSBundle*)bundle
 {
-    if (self = [self initWithNibName:nil bundle:bundle]) {
+    if (self = [self initWithNibName:@"BeatView" bundle:bundle]) {
         self->beat = beat;
         self->auth = auth;
     }
     return self;
-}
-
-- (void)fail:(NSString*)msg {
-    [statusLabel setStringValue:msg];
 }
 
 - (void)viewDidLoad {
@@ -48,13 +37,9 @@ NSString *plistPath = @"/tmp/plist";
     [self updateUI];
 }
 
-NSString *strOrNil(NSString *str) {
-    return str != nil? str : @"(nil)";
-}
-
 - (void)updateUI {
     id<Beat> beat = self->beat;
-    
+
     if ([beat isRunning]) {
         [statusLabel setStringValue:[NSString stringWithFormat:@"%@ is running with PID %d", [beat name], [beat pid]]];
         [startStopButton setTitle:@"Stop"];
@@ -62,7 +47,7 @@ NSString *strOrNil(NSString *str) {
         [statusLabel setStringValue:[NSString stringWithFormat:@"%@ is stopped", [beat name]]];
         [startStopButton setTitle:@"Start"];
     }
-    
+
     if ([beat isBoot]) {
         [bootLabel setStringValue:@"Automatic start at boot is enabled"];
         [bootButton setTitle:@"Disable"];
@@ -72,7 +57,7 @@ NSString *strOrNil(NSString *str) {
     }
     [configField setStringValue:strOrNil([beat configFile])];
     [logsField setStringValue:strOrNil([beat logsPath])];
-    
+
     BOOL unlocked = [auth isUnlocked];
     [startStopButton setEnabled:unlocked];
     [bootButton setEnabled:unlocked];
@@ -85,7 +70,7 @@ NSString *strOrNil(NSString *str) {
     }
     uint64_t took = getTimeMicroseconds();
     id<Beat> beat = self->beat;
-    
+
     if ([beat isRunning]) {
         [beat stopWithAuth:auth];
     } else {
@@ -110,16 +95,25 @@ NSString *strOrNil(NSString *str) {
     }
     id<Beat> beat = self->beat;
     NSString *conf = [beat configFile];
+
+    // Create a temporal file with current user permissions
     NSString *tmpFile = [NSString stringWithFormat:@"%@/beatconf-%@.yml",NSTemporaryDirectory(), [[NSUUID UUID] UUIDString]];
     [@"" writeToFile:tmpFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
+
+    // Cat the config file contents into the temporal file
     [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", conf, tmpFile]]];
-    NSLog(@"Copied `%@` to `%@`", conf, tmpFile);
+
+    // Display editor on temp file
     EditorWindow *editor = [[EditorWindow alloc] initWithBeat:[beat name] config:tmpFile];
     NSWindow *window = [editor window];
     [window setFrameOrigin:[[[self view] window] frame].origin];
     NSModalResponse resp = [NSApp runModalForWindow: window];
+
     if (resp == NSModalResponseOK) {
+        // Cat temporal file contents into config file.
         while ([auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", tmpFile, conf]]] != errAuthorizationSuccess) {
+            // Authorization expired because the user took a while to edit the config
+            // Ask to reauthorize
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"Retry"];
             [alert addButtonWithTitle:@"Cancel"];
@@ -132,15 +126,13 @@ NSString *strOrNil(NSString *str) {
             [auth forceUnlock];
         }
     }
+
     [[NSFileManager defaultManager] removeItemAtPath:tmpFile error:nil];
 }
 
 - (void) update {
-    uint64_t elapsed = getTimeMicroseconds();
     beat = [beatsInterface getBeat:[beat name]];
     [self updateUI];
-    elapsed = getTimeMicroseconds() - elapsed;
-    NSLog(@"Update tab took %lld us", elapsed);
 }
 
 @end

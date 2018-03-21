@@ -19,7 +19,8 @@
 #import "beats/Beats.h"
 #import "Authorization.h"
 
-@interface BeatTabController : NSViewController
+// BeatViewController handles the individual UI view for a beat
+@interface BeatViewController : NSViewController
 {
     IBOutlet NSTextField *statusLabel;
     IBOutlet NSTextField *bootLabel;
@@ -28,8 +29,10 @@
     IBOutlet NSButton *startStopButton;
     IBOutlet NSButton *bootButton;
     IBOutlet NSButton *editButton;
-    
+
+    // The Beat being displayed by this view
     id<Beat> beat;
+
     id<AuthorizationProvider> auth;
 }
 
