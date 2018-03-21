@@ -76,7 +76,7 @@
 		3A6F9ABE202C939D0046F40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A915921205EB4F4007DE746 /* EditorWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorWindow.h; sourceTree = "<group>"; };
 		3A915922205EB4F4007DE746 /* EditorWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditorWindow.m; sourceTree = "<group>"; };
-		3A915923205EB4F4007DE746 /* EditorWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditorWindow.xib; sourceTree = "<group>"; };
+		3A915923205EB4F4007DE746 /* EditorWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Base.lproj/EditorWindow.xib; sourceTree = "<group>"; };
 		3AA415CC2051B206008915AA /* BeatsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsService.h; sourceTree = "<group>"; };
 		3AA415CD2051B206008915AA /* BeatsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsService.m; sourceTree = "<group>"; };
 		3AA415D520572B5A008915AA /* Authorization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Authorization.h; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		3AD0D412203CE40800338653 /* BeatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatViewController.m; sourceTree = "<group>"; };
 		3AD0D417203CECDA00338653 /* TabViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabViewDelegate.h; sourceTree = "<group>"; };
 		3AD0D418203CECDA00338653 /* TabViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabViewDelegate.m; sourceTree = "<group>"; };
-		3AD0D41F203D791100338653 /* BeatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BeatView.xib; sourceTree = "<group>"; };
+		3AD0D41F203D791100338653 /* BeatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Base.lproj/BeatView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
