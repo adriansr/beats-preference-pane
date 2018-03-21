@@ -8,7 +8,7 @@
 
 #import "BeatTabController.h"
 #import "EditorWindow.h"
-#import "common.h"
+#import "common/common.h"
 #import "globals.h"
 
 @interface BeatTabController ()

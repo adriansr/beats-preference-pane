@@ -7,7 +7,7 @@
 //
 
 #import "BeatsService.h"
-#import "common.h"
+#import "../common/common.h"
 #import "globals.h"
 
 static NSString *launchDaemonsPath = @"/Library/LaunchDaemons";

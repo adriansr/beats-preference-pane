@@ -8,7 +8,7 @@
 
 #import "BeatTabHandler.h"
 #import "BeatTabController.h"
-#import "common.h"
+#import "common/common.h"
 #import "globals.h"
 
 @implementation BeatTabHandler
