@@ -16,6 +16,4 @@
 
 #import "globals.h"
 
-NSBundle *prefPaneBundle;
-id<AuthorizationProvider> authManager;
 id<Beats> beatsInterface;
