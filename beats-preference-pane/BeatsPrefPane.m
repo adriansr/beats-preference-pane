@@ -7,7 +7,6 @@
 //
 
 #import "BeatsPrefPane.h"
-#import "beats/BeatsMock.h"
 #import "beats/BeatsService.h"
 #import "globals.h"
 

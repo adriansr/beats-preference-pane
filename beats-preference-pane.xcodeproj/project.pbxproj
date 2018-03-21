@@ -10,8 +10,6 @@
 		3A0F656C205D5AE9009DBAE7 /* setboot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0F656B205D5AE9009DBAE7 /* setboot.m */; };
 		3A34B24E203B1F480079E62C /* Beats.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34B24C203B1F480079E62C /* Beats.h */; };
 		3A34B251203B239F0079E62C /* Beats.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3A34B250203B239F0079E62C /* Beats.icns */; };
-		3A34B254203B26D90079E62C /* BeatsMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34B252203B26D80079E62C /* BeatsMock.h */; };
-		3A34B255203B26D90079E62C /* BeatsMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34B253203B26D80079E62C /* BeatsMock.m */; };
 		3A6F9AB6202C939D0046F40E /* BeatsPrefPane.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6F9AB5202C939D0046F40E /* BeatsPrefPane.h */; };
 		3A6F9AB8202C939D0046F40E /* BeatsPrefPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6F9AB7202C939D0046F40E /* BeatsPrefPane.m */; };
 		3A6F9ABD202C939D0046F40E /* BeatsPrefPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6F9ABB202C939D0046F40E /* BeatsPrefPane.xib */; };
@@ -69,8 +67,6 @@
 		3A0F656B205D5AE9009DBAE7 /* setboot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = setboot.m; sourceTree = "<group>"; };
 		3A34B24C203B1F480079E62C /* Beats.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Beats.h; sourceTree = "<group>"; };
 		3A34B250203B239F0079E62C /* Beats.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Beats.icns; sourceTree = "<group>"; };
-		3A34B252203B26D80079E62C /* BeatsMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsMock.h; sourceTree = "<group>"; };
-		3A34B253203B26D80079E62C /* BeatsMock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsMock.m; sourceTree = "<group>"; };
 		3A6F9AB2202C939D0046F40E /* Beats.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Beats.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6F9AB5202C939D0046F40E /* BeatsPrefPane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsPrefPane.h; sourceTree = "<group>"; };
 		3A6F9AB7202C939D0046F40E /* BeatsPrefPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsPrefPane.m; sourceTree = "<group>"; };
@@ -160,8 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				3A34B24C203B1F480079E62C /* Beats.h */,
-				3A34B252203B26D80079E62C /* BeatsMock.h */,
-				3A34B253203B26D80079E62C /* BeatsMock.m */,
 				3AA415CC2051B206008915AA /* BeatsService.h */,
 				3AA415CD2051B206008915AA /* BeatsService.m */,
 			);
@@ -198,7 +192,6 @@
 				3AA415E7205838C7008915AA /* globals.h in Headers */,
 				3AA415CE2051B206008915AA /* BeatsService.h in Headers */,
 				3A915924205EB4F4007DE746 /* EditorWindow.h in Headers */,
-				3A34B254203B26D90079E62C /* BeatsMock.h in Headers */,
 				3A6F9AB6202C939D0046F40E /* BeatsPrefPane.h in Headers */,
 				3AD0D419203CECDA00338653 /* BeatTabHandler.h in Headers */,
 			);
@@ -307,7 +300,6 @@
 				3A6F9AB8202C939D0046F40E /* BeatsPrefPane.m in Sources */,
 				3AA415CF2051B206008915AA /* BeatsService.m in Sources */,
 				3AD0D415203CE40800338653 /* BeatTabController.m in Sources */,
-				3A34B255203B26D90079E62C /* BeatsMock.m in Sources */,
 				3AA415E8205838C7008915AA /* globals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
