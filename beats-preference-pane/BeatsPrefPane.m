@@ -21,7 +21,6 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
         prefPaneBundle = bundle;
         beatsInterface = [[BeatsService alloc] initWithPrefix:beatsPrefix];
         updateTimer = nil;
-        authManager = self;
         knownBeats = [beatsInterface listBeats];
     }
     return self;
@@ -79,7 +78,7 @@ BOOL beatArrayEquals(NSArray *a, NSArray *b)
 }
 
 - (void)updateUI {
-    [messageLabel setHidden:[tabHandler updateTabs:knownBeats]];
+    [messageLabel setHidden:[tabHandler updateTabs:knownBeats withAuth:self]];
 }
 
 - (BOOL)isUnlocked {

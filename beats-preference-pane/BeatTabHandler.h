@@ -19,7 +19,7 @@
 - (id) initWithTabView:(NSTabView*)_;
 - (void) update;
 // TODO: get rid of
-- (BOOL) updateTabs:(NSArray*)_;
+- (BOOL) updateTabs:(NSArray*)_ withAuth:(id<AuthorizationProvider>)_;
 //- (void) updateSelectedTab:(BOOL) isUnlocked;
 
 // NSTabViewDelegate

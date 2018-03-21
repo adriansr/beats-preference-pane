@@ -27,7 +27,7 @@
     [(BeatTabController*)selectedTab update];
 }
 
-- (BOOL) updateTabs:(NSArray*)beats
+- (BOOL) updateTabs:(NSArray*)beats withAuth:(id<AuthorizationProvider>)auth
 {
     NSViewController *selectedTab = self->selectedTab;
     uint i;
@@ -45,7 +45,7 @@
         NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
         [item setLabel:beatName];
         BeatTabController *tc = [[BeatTabController alloc]
-                                 initWithBeat:[beatsInterface getBeat:beatName]];
+                                 initWithBeat:[beatsInterface getBeat:beatName] auth:auth];
         [item setViewController:tc];
         [tabView addTabViewItem:item];
         if ([beatName isEqualToString:selectedName]) {

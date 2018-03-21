@@ -22,9 +22,10 @@
     IBOutlet NSButton *editButton;
     
     id<Beat> beat;
+    id<AuthorizationProvider> auth;
 }
 
-- (id)initWithBeat:(id<Beat>)_;
+- (id)initWithBeat:(id<Beat>)_ auth:(id<AuthorizationProvider>)_;
 - (IBAction)startStopTapped:(id)sender;
 - (IBAction)startAtBootTapped:(id)sender;
 - (IBAction)editConfigTapped:(id)sender;

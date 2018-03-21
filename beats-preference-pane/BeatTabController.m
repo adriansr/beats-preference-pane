@@ -20,10 +20,11 @@ NSString *plistPath = @"/tmp/plist";
 
 @implementation BeatTabController
 
-- (id) initWithBeat:(id<Beat>)beat
+- (id) initWithBeat:(id<Beat>)beat auth:(id<AuthorizationProvider>)auth
 {
     if (self = [self initWithNibName:nil bundle:prefPaneBundle]) {
         self->beat = beat;
+        self->auth = auth;
     }
     return self;
 }
@@ -62,23 +63,23 @@ NSString *strOrNil(NSString *str) {
     [configField setStringValue:strOrNil([beat configFile])];
     [logsField setStringValue:strOrNil([beat logsPath])];
     
-    BOOL unlocked = [authManager isUnlocked];
+    BOOL unlocked = [auth isUnlocked];
     [startStopButton setEnabled:unlocked];
     [bootButton setEnabled:unlocked];
     [editButton setEnabled:unlocked];
 }
 
 - (IBAction)startStopTapped:(id)sender {
-    if (![authManager isUnlocked]) {
+    if (![auth isUnlocked]) {
         return;
     }
     uint64_t took = getTimeMicroseconds();
     id<Beat> beat = self->beat;
     
     if ([beat isRunning]) {
-        [beat stopWithAuth:authManager];
+        [beat stopWithAuth:auth];
     } else {
-        [beat startWithAuth:authManager];
+        [beat startWithAuth:auth];
     }
     took = getTimeMicroseconds() - took;
     NSLog(@"start/stop took %lld us", took);
@@ -86,29 +87,29 @@ NSString *strOrNil(NSString *str) {
 }
 
 - (IBAction)startAtBootTapped:(id)sender {
-    if (![authManager isUnlocked]) {
+    if (![auth isUnlocked]) {
         return;
     }
-    [beat toggleRunAtBootWithAuth:authManager];
+    [beat toggleRunAtBootWithAuth:auth];
     [self update];
 }
 
 - (IBAction)editConfigTapped:(id)sender {
-    if (![authManager isUnlocked]) {
+    if (![auth isUnlocked]) {
         return;
     }
     id<Beat> beat = self->beat;
     NSString *conf = [beat configFile];
     NSString *tmpFile = [NSString stringWithFormat:@"%@/beatconf-%@.yml",NSTemporaryDirectory(), [[NSUUID UUID] UUIDString]];
     [@"" writeToFile:tmpFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
-    [authManager runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", conf, tmpFile]]];
+    [auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", conf, tmpFile]]];
     NSLog(@"Copied `%@` to `%@`", conf, tmpFile);
     EditorWindow *editor = [[EditorWindow alloc] initWithBeat:[beat name] config:tmpFile];
     NSWindow *window = [editor window];
     [window setFrameOrigin:[[[self view] window] frame].origin];
     NSModalResponse resp = [NSApp runModalForWindow: window];
     if (resp == NSModalResponseOK) {
-        while ([authManager runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", tmpFile, conf]]] != errAuthorizationSuccess) {
+        while ([auth runAsRoot:@"/bin/sh" args:@[@"-c", [NSString stringWithFormat:@"cat '%@' > '%@'", tmpFile, conf]]] != errAuthorizationSuccess) {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"Retry"];
             [alert addButtonWithTitle:@"Cancel"];
@@ -118,7 +119,7 @@ NSString *strOrNil(NSString *str) {
             if ([alert runModal] != NSAlertFirstButtonReturn) {
                 break;
             }
-            [authManager forceUnlock];
+            [auth forceUnlock];
         }
     }
     [[NSFileManager defaultManager] removeItemAtPath:tmpFile error:nil];
