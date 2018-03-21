@@ -10,4 +10,5 @@
 - (BOOL) isUnlocked;
 - (BOOL) forceUnlock;
 - (int) runAsRoot:(NSString*) program args:(NSArray*)args;
+- (int) runHelperAsRootWithArgs:(NSArray*)args;
 @end

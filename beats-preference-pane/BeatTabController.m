@@ -20,9 +20,11 @@ NSString *plistPath = @"/tmp/plist";
 
 @implementation BeatTabController
 
-- (id) initWithBeat:(id<Beat>)beat auth:(id<AuthorizationProvider>)auth
+- (id) initWithBeat:(id<Beat>)beat
+               auth:(id<AuthorizationProvider>)auth
+             bundle:(NSBundle*)bundle
 {
-    if (self = [self initWithNibName:nil bundle:prefPaneBundle]) {
+    if (self = [self initWithNibName:nil bundle:bundle]) {
         self->beat = beat;
         self->auth = auth;
     }

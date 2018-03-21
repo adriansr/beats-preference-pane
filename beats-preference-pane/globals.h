@@ -10,5 +10,4 @@
 #import "Authorization.h"
 #import "Beats.h"
 
-extern NSBundle *prefPaneBundle;
 extern id<Beats> beatsInterface;

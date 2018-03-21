@@ -14,9 +14,10 @@
 
 @interface BeatTabHandler : NSObject <NSTabViewDelegate> {
     NSTabView *tabView;
+    NSBundle *bundle;
     id selectedTab;
 }
-- (id) initWithTabView:(NSTabView*)_;
+- (id) initWithTabView:(NSTabView*)_ bundle:(NSBundle*)_;
 - (void) update;
 // TODO: get rid of
 - (BOOL) updateTabs:(NSArray*)_ withAuth:(id<AuthorizationProvider>)_;

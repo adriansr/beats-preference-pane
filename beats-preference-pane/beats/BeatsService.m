@@ -15,16 +15,6 @@ static NSString *plistExtension = @"plist";
 static NSString *launchctlPath = @"/bin/launchctl";
 static NSString *empty = @"";
 
-static NSString *helperPath = nil;
-
-NSString *getHelperPath() {
-    if (helperPath == nil) {
-        helperPath = [prefPaneBundle pathForAuxiliaryExecutable:@"helper"];
-        NSLog(@"Using helper: `%@`", helperPath);
-    }
-    return helperPath;
-}
-
 @interface ConcreteBeat : NSObject <Beat> {
     @public NSString *config;
     @public NSString *logs;
@@ -90,14 +80,14 @@ NSString *getHelperPath() {
     return [NSString stringWithFormat:@"system/%@", [self serviceName]];
 }
 
-BOOL runTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
+BOOL runHelperTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
     BOOL __block failed = YES;
     [argList enumerateObjectsUsingBlock:^(id obj, NSUInteger _, BOOL *stop) {
         NSArray *args = (NSArray*)obj;
-        int res = [auth runAsRoot:args[0] args:args[1]];
+        int res = [auth runHelperAsRootWithArgs:args];
         if (res != 0) {
-            NSLog(@"Error: command `%@ %@` failed with code %d",
-                  launchctlPath, [args componentsJoinedByString:@" "], res);
+            NSLog(@"Error: running helper with args `%@` failed with code %d",
+                  [args componentsJoinedByString:@" "], res);
             *stop = failed = YES;
         }
     }];
@@ -105,22 +95,22 @@ BOOL runTaskList(id<AuthorizationProvider> auth, NSArray *argList) {
 }
 
 - (BOOL)startWithAuth:(id<AuthorizationProvider>)auth {
-    return runTaskList(auth,@[
-        @[ getHelperPath(), @[ @"run", launchctlPath, @"enable", [self serviceNameWithDomain] ] ],
-        @[ getHelperPath(), @[ @"run", launchctlPath, @"start", [self serviceName] ] ]
+    return runHelperTaskList(auth,@[
+        @[ @"run", launchctlPath, @"enable", [self serviceNameWithDomain] ],
+        @[ @"run", launchctlPath, @"start", [self serviceName] ]
     ]);
 }
 
 - (BOOL)stopWithAuth:(id<AuthorizationProvider>)auth {
-    return runTaskList(auth,@[
-        @[ getHelperPath(), @[ @"run", launchctlPath, @"disable", [self serviceNameWithDomain] ] ],
-        @[ getHelperPath(), @[ @"run", launchctlPath, @"stop", [self serviceName] ] ]
+    return runHelperTaskList(auth,@[
+        @[ @"run", launchctlPath, @"disable", [self serviceNameWithDomain] ],
+        @[ @"run", launchctlPath, @"stop", [self serviceName] ]
     ]);
 }
 
 - (BOOL)toggleRunAtBootWithAuth:(id<AuthorizationProvider>)auth {
-    return runTaskList(auth,@[
-         @[ getHelperPath(), @[ @"setboot", [self plistPath], self->startAtBoot? @"no" : @"yes"] ]
+    return runHelperTaskList(auth,@[
+         @[ @"setboot", [self plistPath], self->startAtBoot? @"no" : @"yes"]
     ]);
 }
 

@@ -12,11 +12,13 @@
 #import "globals.h"
 
 @implementation BeatTabHandler
-- (id) initWithTabView:(NSTabView *)tabView;
+- (id) initWithTabView:(NSTabView *)tabView
+                bundle:(NSBundle*)bundle
 {
     if (self = [super init]) {
         self->selectedTab = nil;
         self->tabView = tabView;
+        self->bundle = bundle;
         tabView.delegate = self;
     }
     return self;
@@ -45,7 +47,7 @@
         NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
         [item setLabel:beatName];
         BeatTabController *tc = [[BeatTabController alloc]
-                                 initWithBeat:[beatsInterface getBeat:beatName] auth:auth];
+                                 initWithBeat:[beatsInterface getBeat:beatName] auth:auth bundle:bundle];
         [item setViewController:tc];
         [tabView addTabViewItem:item];
         if ([beatName isEqualToString:selectedName]) {

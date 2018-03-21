@@ -18,10 +18,12 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
 - (id)initWithBundle:(NSBundle *)bundle
 {
     if ( ( self = [super initWithBundle:bundle] ) != nil ) {
-        prefPaneBundle = bundle;
         beatsInterface = [[BeatsService alloc] initWithPrefix:beatsPrefix];
-        updateTimer = nil;
-        knownBeats = [beatsInterface listBeats];
+        self->updateTimer = nil;
+        self->knownBeats = [beatsInterface listBeats];
+        self->bundle = bundle;
+        self->helperPath = [bundle pathForAuxiliaryExecutable:@"helper"];
+        NSLog(@"Using helper: `%@`", helperPath);
     }
     return self;
 }
@@ -34,7 +36,7 @@ static const double UPDATE_INTERVAL_SECS = 2.0;
     [authView setAuthorizationRights:&rights];
     authView.delegate = self;
     [authView updateStatus:nil];
-    tabHandler = [[BeatTabHandler alloc] initWithTabView:beatsTab];
+    tabHandler = [[BeatTabHandler alloc] initWithTabView:beatsTab bundle:bundle];
 }
 
 - (void)willSelect
@@ -121,6 +123,11 @@ BOOL beatArrayEquals(NSArray *a, NSArray *b)
 - (BOOL)forceUnlock {
     return [authView authorize:nil];
 }
+
+- (int)runHelperAsRootWithArgs:(NSArray *)args {
+    return [self runAsRoot:helperPath args:args];
+}
+
 
 //
 // SFAuthorization delegates

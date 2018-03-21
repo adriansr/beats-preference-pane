@@ -18,7 +18,9 @@
     IBOutlet SFAuthorizationView *authView;
     IBOutlet NSTextField *messageLabel;
     NSTimer *updateTimer;
+    NSBundle *bundle;
     NSArray *knownBeats;
+    NSString *helperPath;
 }
 
 - (id)initWithBundle:(NSBundle *)bundle;

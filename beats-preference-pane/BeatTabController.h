@@ -25,7 +25,7 @@
     id<AuthorizationProvider> auth;
 }
 
-- (id)initWithBeat:(id<Beat>)_ auth:(id<AuthorizationProvider>)_;
+- (id)initWithBeat:(id<Beat>)_ auth:(id<AuthorizationProvider>)_ bundle:(NSBundle*)_;
 - (IBAction)startStopTapped:(id)sender;
 - (IBAction)startAtBootTapped:(id)sender;
 - (IBAction)editConfigTapped:(id)sender;
