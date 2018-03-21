@@ -63,7 +63,7 @@ int main(int argc, const char * argv[]) {
             fprintf(stderr, "Unknown boot value: `%s`. Use `yes` or `no`\n", argv[3]);
             return 1;
         }
-        return YES!=setRunAtBoot([NSString stringWithUTF8String:argv[2]], value);
+        return setRunAtBoot([NSString stringWithUTF8String:argv[2]], value)? 0 : 4;
     } else {
         fprintf(stderr, "Unknown action: %s\n", argv[1]);
         return 1;

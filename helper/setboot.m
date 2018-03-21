@@ -20,6 +20,9 @@ static void fail(NSString *msg) {
     fprintf(stderr, "%s\n", [msg cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
+// setRunAtBoot loads a property list for a launch daemon,
+// changes the value of the RunAtLoad property, and writes it
+// down to disk again.
 BOOL setRunAtBoot(NSString* plistPath, BOOL runAtBoot) {
     // Mutable property list so it can be changed in-place
     NSPropertyListMutabilityOptions opts = NSPropertyListMutableContainersAndLeaves;
