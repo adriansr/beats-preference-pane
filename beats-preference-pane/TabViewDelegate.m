@@ -55,6 +55,13 @@
     }
     for (uint i=0; i < beats.count; i++) {
         NSString *beatName = [beats objectAtIndex:i];
+        id<Beat> beat = [beatsInterface getBeat:beatName];
+        if (beat == nil) {
+            // TODO: Investigate and repair. Why some beats seem to break. Seemingly after some time disabled
+            //       they are unloaded from launchctl.
+            NSLog(@"Ignoring broken beat %@", beatName);
+            continue;
+        }
         NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
         [item setLabel:beatName];
         BeatViewController *vc = [[BeatViewController alloc]
