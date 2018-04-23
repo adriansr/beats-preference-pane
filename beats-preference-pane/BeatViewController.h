@@ -33,11 +33,11 @@
 
     // The Beat being displayed by this view
     id<Beat> beat;
-
+    id<Beats> beatsInterface;
     id<AuthorizationProvider> auth;
 }
 
-- (id)initWithBeat:(id<Beat>)_ auth:(id<AuthorizationProvider>)_ bundle:(NSBundle*)_;
+- (id)initWithBeat:(id<Beat>)_ auth:(id<AuthorizationProvider>)_ bundle:(NSBundle*)_ beatsInterface:(id<Beats>)_;
 - (IBAction)startStopTapped:(id)sender;
 - (IBAction)startAtBootTapped:(id)sender;
 - (IBAction)editConfigTapped:(id)sender;

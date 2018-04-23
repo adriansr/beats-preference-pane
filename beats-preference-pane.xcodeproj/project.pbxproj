@@ -17,19 +17,17 @@
 		3A8FA06D20626DEF0091102D /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0A94420626C7B00741C93 /* common.m */; };
 		3A915924205EB4F4007DE746 /* EditorWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A915921205EB4F4007DE746 /* EditorWindow.h */; };
 		3A915925205EB4F4007DE746 /* EditorWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A915922205EB4F4007DE746 /* EditorWindow.m */; };
-		3A915926205EB4F4007DE746 /* EditorWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A915923205EB4F4007DE746 /* EditorWindow.xib */; };
+		3A915926205EB4F4007DE746 /* Base.lproj/EditorWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A915923205EB4F4007DE746 /* Base.lproj/EditorWindow.xib */; };
 		3AA415CE2051B206008915AA /* BeatsService.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA415CC2051B206008915AA /* BeatsService.h */; };
 		3AA415CF2051B206008915AA /* BeatsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415CD2051B206008915AA /* BeatsService.m */; };
 		3AA415DD20582B34008915AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415DC20582B34008915AA /* main.m */; };
 		3AA415E4205833A3008915AA /* helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AA415DA20582B34008915AA /* helper */; };
-		3AA415E7205838C7008915AA /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA415E5205838C7008915AA /* globals.h */; };
-		3AA415E8205838C7008915AA /* globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA415E6205838C7008915AA /* globals.m */; };
 		3AC0A94620626C7C00741C93 /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0A94420626C7B00741C93 /* common.m */; };
 		3AD0D414203CE40800338653 /* BeatViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AD0D411203CE40800338653 /* BeatViewController.h */; };
 		3AD0D415203CE40800338653 /* BeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD0D412203CE40800338653 /* BeatViewController.m */; };
 		3AD0D419203CECDA00338653 /* TabViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AD0D417203CECDA00338653 /* TabViewDelegate.h */; };
 		3AD0D41A203CECDA00338653 /* TabViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD0D418203CECDA00338653 /* TabViewDelegate.m */; };
-		3AD0D420203D791100338653 /* BeatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD0D41F203D791100338653 /* BeatView.xib */; };
+		3AD0D420203D791100338653 /* Base.lproj/BeatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD0D41F203D791100338653 /* Base.lproj/BeatView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,21 +74,19 @@
 		3A6F9ABE202C939D0046F40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A915921205EB4F4007DE746 /* EditorWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorWindow.h; sourceTree = "<group>"; };
 		3A915922205EB4F4007DE746 /* EditorWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditorWindow.m; sourceTree = "<group>"; };
-		3A915923205EB4F4007DE746 /* EditorWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Base.lproj/EditorWindow.xib; sourceTree = "<group>"; };
+		3A915923205EB4F4007DE746 /* Base.lproj/EditorWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Base.lproj/EditorWindow.xib; sourceTree = "<group>"; };
 		3AA415CC2051B206008915AA /* BeatsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatsService.h; sourceTree = "<group>"; };
 		3AA415CD2051B206008915AA /* BeatsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatsService.m; sourceTree = "<group>"; };
 		3AA415D520572B5A008915AA /* Authorization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Authorization.h; sourceTree = "<group>"; };
 		3AA415DA20582B34008915AA /* helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = helper; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA415DC20582B34008915AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3AA415E5205838C7008915AA /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
-		3AA415E6205838C7008915AA /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
 		3AC0A94420626C7B00741C93 /* common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
 		3AC0A94520626C7C00741C93 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		3AD0D411203CE40800338653 /* BeatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeatViewController.h; sourceTree = "<group>"; };
 		3AD0D412203CE40800338653 /* BeatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeatViewController.m; sourceTree = "<group>"; };
 		3AD0D417203CECDA00338653 /* TabViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabViewDelegate.h; sourceTree = "<group>"; };
 		3AD0D418203CECDA00338653 /* TabViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabViewDelegate.m; sourceTree = "<group>"; };
-		3AD0D41F203D791100338653 /* BeatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Base.lproj/BeatView.xib; sourceTree = "<group>"; };
+		3AD0D41F203D791100338653 /* Base.lproj/BeatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Base.lproj/BeatView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +130,7 @@
 			children = (
 				3AC0A94320626C6B00741C93 /* common */,
 				3AA415C9205159E1008915AA /* beats */,
-				3AD0D41F203D791100338653 /* BeatView.xib */,
+				3AD0D41F203D791100338653 /* Base.lproj/BeatView.xib */,
 				3A34B250203B239F0079E62C /* Beats.icns */,
 				3A6F9AB5202C939D0046F40E /* BeatsPrefPane.h */,
 				3A6F9AB7202C939D0046F40E /* BeatsPrefPane.m */,
@@ -145,11 +141,9 @@
 				3AD0D417203CECDA00338653 /* TabViewDelegate.h */,
 				3AD0D418203CECDA00338653 /* TabViewDelegate.m */,
 				3AA415D520572B5A008915AA /* Authorization.h */,
-				3AA415E5205838C7008915AA /* globals.h */,
-				3AA415E6205838C7008915AA /* globals.m */,
 				3A915921205EB4F4007DE746 /* EditorWindow.h */,
 				3A915922205EB4F4007DE746 /* EditorWindow.m */,
-				3A915923205EB4F4007DE746 /* EditorWindow.xib */,
+				3A915923205EB4F4007DE746 /* Base.lproj/EditorWindow.xib */,
 				3A6BA0632062CEAA00A05921 /* config.h */,
 			);
 			path = "beats-preference-pane";
@@ -192,7 +186,6 @@
 			files = (
 				3AD0D414203CE40800338653 /* BeatViewController.h in Headers */,
 				3A34B24E203B1F480079E62C /* Beats.h in Headers */,
-				3AA415E7205838C7008915AA /* globals.h in Headers */,
 				3AA415CE2051B206008915AA /* BeatsService.h in Headers */,
 				3A6BA0642062CEAA00A05921 /* config.h in Headers */,
 				3A915924205EB4F4007DE746 /* EditorWindow.h in Headers */,
@@ -284,9 +277,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A915926205EB4F4007DE746 /* EditorWindow.xib in Resources */,
+				3A915926205EB4F4007DE746 /* Base.lproj/EditorWindow.xib in Resources */,
 				3A34B251203B239F0079E62C /* Beats.icns in Resources */,
-				3AD0D420203D791100338653 /* BeatView.xib in Resources */,
+				3AD0D420203D791100338653 /* Base.lproj/BeatView.xib in Resources */,
 				3A6F9ABD202C939D0046F40E /* BeatsPrefPane.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,7 +297,6 @@
 				3A6F9AB8202C939D0046F40E /* BeatsPrefPane.m in Sources */,
 				3AA415CF2051B206008915AA /* BeatsService.m in Sources */,
 				3AD0D415203CE40800338653 /* BeatViewController.m in Sources */,
-				3AA415E8205838C7008915AA /* globals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

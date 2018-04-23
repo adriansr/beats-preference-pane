@@ -33,6 +33,7 @@
     NSBundle *bundle;
     NSArray *knownBeats;
     NSString *helperPath;
+    id<Beats> beatsInterface;
 }
 
 - (id)initWithBundle:(NSBundle *)bundle;

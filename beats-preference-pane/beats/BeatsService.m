@@ -16,7 +16,6 @@
 
 #import "BeatsService.h"
 #import "../common/common.h"
-#import "globals.h"
 #import "config.h"
 
 static NSString *plistExtension = @"plist";

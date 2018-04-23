@@ -17,16 +17,17 @@
 #import "TabViewDelegate.h"
 #import "BeatViewController.h"
 #import "common/common.h"
-#import "globals.h"
 
 @implementation TabViewDelegate
 - (id) initWithTabView:(NSTabView *)tabView
                 bundle:(NSBundle*)bundle
+                 beats:(id<Beats>)beats
 {
     if (self = [super init]) {
         self->selectedTab = nil;
         self->tabView = tabView;
         self->bundle = bundle;
+        self->beatsInterface = beats;
         tabView.delegate = self;
     }
     return self;
@@ -57,7 +58,7 @@
         NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:beatName];
         [item setLabel:beatName];
         BeatViewController *vc = [[BeatViewController alloc]
-                                 initWithBeat:[beatsInterface getBeat:beatName] auth:auth bundle:bundle];
+                                 initWithBeat:[beatsInterface getBeat:beatName] auth:auth bundle:bundle beatsInterface:beatsInterface];
         [item setViewController:vc];
         [tabView addTabViewItem:item];
         if ([beatName isEqualToString:selectedName]) {

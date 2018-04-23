@@ -17,17 +17,18 @@
 #import "BeatViewController.h"
 #import "EditorWindow.h"
 #import "common/common.h"
-#import "globals.h"
 
 @implementation BeatViewController
 
 - (id) initWithBeat:(id<Beat>)beat
                auth:(id<AuthorizationProvider>)auth
              bundle:(NSBundle*)bundle
+     beatsInterface:(id<Beats>)beatsInterface;
 {
     if (self = [self initWithNibName:@"BeatView" bundle:bundle]) {
         self->beat = beat;
         self->auth = auth;
+        self->beatsInterface = beatsInterface;
     }
     return self;
 }

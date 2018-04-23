@@ -17,7 +17,6 @@
 #import "config.h"
 #import "BeatsPrefPane.h"
 #import "beats/BeatsService.h"
-#import "globals.h"
 
 @implementation BeatsPrefPane
 
@@ -25,7 +24,7 @@
 - (id)initWithBundle:(NSBundle *)bundle
 {
     if ( ( self = [super initWithBundle:bundle] ) != nil ) {
-        beatsInterface = [[BeatsService alloc] initWithPrefix:BEATS_PREFIX];
+        self->beatsInterface = [[BeatsService alloc] initWithPrefix:BEATS_PREFIX];
         self->updateTimer = nil;
         self->knownBeats = [beatsInterface listBeats];
         self->bundle = bundle;
@@ -45,7 +44,7 @@
     authView.delegate = self;
     [authView updateStatus:nil];
     // Allocate tabview delegate
-    tabDelegate = [[TabViewDelegate alloc] initWithTabView:beatsTab bundle:bundle];
+    tabDelegate = [[TabViewDelegate alloc] initWithTabView:beatsTab bundle:bundle beats:beatsInterface];
 }
 
 // Called before the preference pane is shown

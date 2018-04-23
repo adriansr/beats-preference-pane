@@ -28,8 +28,9 @@
     NSTabView *tabView;
     NSBundle *bundle;
     BeatViewController *selectedTab;
+    id <Beats> beatsInterface;
 }
-- (id) initWithTabView:(NSTabView*)_ bundle:(NSBundle*)_;
+- (id) initWithTabView:(NSTabView*)_ bundle:(NSBundle*)_ beats:(id<Beats>)_;
 - (void) update;
 - (void) populateTabs:(NSArray*)_ withAuth:(id<AuthorizationProvider>)_;
 
