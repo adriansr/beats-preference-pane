@@ -128,6 +128,7 @@ static BOOL beatArrayEquals(NSArray *a, NSArray *b)
     NSLog(@"Running AuthorizationExecuteWithPrivileges(`%@ %@`)", program, [args componentsJoinedByString:@" "]);
 
     FILE *pipe = NULL;
+    // TODO: AuthorizationExecuteWithPrivileges is deprecated. Migrate to SMJobBless
     int res = AuthorizationExecuteWithPrivileges([[authView authorization] authorizationRef],
                                        [program cStringUsingEncoding:NSUTF8StringEncoding],
                                        kAuthorizationFlagDefaults,
